@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整">
+<meta name="keywords" content="LeetCode,动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/06/08/hello-world/index.html">
+<meta property="og:title" content="DP-最长递增子序列的个数">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/DP-最长递增子序列的个数/index.html">
 <meta property="og:site_name" content="ResultLv">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-08T15:12:19.737Z">
+<meta property="og:updated_time" content="2018-06-09T06:31:43.519Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="DP-最长递增子序列的个数">
+<meta name="twitter:description" content="题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/08/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/09/DP-最长递增子序列的个数/"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>Hello World | ResultLv</title>
+  <title>DP-最长递增子序列的个数 | ResultLv</title>
   
 
 
@@ -304,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/DP-最长递增子序列的个数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Result Lv">
@@ -321,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">DP-最长递增子序列的个数
               
             
           </h1>
@@ -346,12 +347,34 @@
                 
               
 
-              <time title="创建时间：2018-06-08 23:12:19" itemprop="dateCreated datePublished" datetime="2018-06-08T23:12:19+08:00">2018-06-08</time>
+              <time title="创建时间：2018-06-09 14:18:02 / 修改时间：14:31:43" itemprop="dateCreated datePublished" datetime="2018-06-09T14:18:02+08:00">2018-06-09</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -380,16 +403,10 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个未排序的整数数组，找到最长递增子序列的个数。<br>示例 1:<br>输入: [1,3,5,4,7]<br>输出: 2<br>解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。</p>
+<p>示例 2:<br>输入: [2,2,2,2,2]<br>输出: 5<br>解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。</p>
+<p>注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。</p>
+<h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><h3 id="O-n-2-解法，DP实现"><a href="#O-n-2-解法，DP实现" class="headerlink" title="O(n^2)解法，DP实现"></a>O(n^2)解法，DP实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">cclass Solution &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findNumberOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span> [nums.length];</span><br><span class="line">        <span class="keyword">int</span> [] count = <span class="keyword">new</span> <span class="keyword">int</span> [nums.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            dp[i] = count[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &gt; nums[j])&#123;</span><br><span class="line">                    <span class="keyword">if</span>(dp[i] &lt; dp[j] + <span class="number">1</span>)&#123;</span><br><span class="line">                        dp[i] = dp[j] + <span class="number">1</span>;</span><br><span class="line">                        count[i] = count[j];</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(dp[i] == dp[j] + <span class="number">1</span>)&#123;   <span class="comment">//统计当前长度子序列可由多少次长序列加1得到</span></span><br><span class="line">                        count[i] += count[j];</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            maxLen = Math.max(maxLen, dp[i]);</span><br><span class="line">            <span class="comment">// System.out.println(count[i] + " " + dp[i]);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count.length; i++)&#123;  <span class="comment">// 考虑重复情况</span></span><br><span class="line">            <span class="keyword">if</span>(dp[i] == maxLen) res += count[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count[nums.length-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -407,6 +424,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+        </div>
+      
 
       
       
@@ -416,14 +441,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/06/09/DP-乘积最大子序列/" rel="next" title="DP-乘积最大子序列">
+                <i class="fa fa-chevron-left"></i> DP-乘积最大子序列
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/09/DP-单词拆分 I/" rel="prev" title="DP-单词拆分 I">
-                DP-单词拆分 I <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/09/DFS-括号生成/" rel="prev" title="DFS-括号生成">
+                DFS-括号生成 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -588,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思路"><span class="nav-number">1.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-2-解法，DP实现"><span class="nav-number">1.2.</span> <span class="nav-text">O(n^2)解法，DP实现</span></a></li></ol></li></ol></div>
             
 
           </div>

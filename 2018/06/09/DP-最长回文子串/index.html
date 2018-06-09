@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &amp;#123;    public String longestPa">
+<meta name="keywords" content="LeetCode,动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/06/08/hello-world/index.html">
+<meta property="og:title" content="DP-最长回文子串">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/DP-最长回文子串/index.html">
 <meta property="og:site_name" content="ResultLv">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &amp;#123;    public String longestPa">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-08T15:12:19.737Z">
+<meta property="og:updated_time" content="2018-06-09T06:29:35.325Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="DP-最长回文子串">
+<meta name="twitter:description" content="题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &amp;#123;    public String longestPa">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/08/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/09/DP-最长回文子串/"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>Hello World | ResultLv</title>
+  <title>DP-最长回文子串 | ResultLv</title>
   
 
 
@@ -304,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/DP-最长回文子串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Result Lv">
@@ -321,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">DP-最长回文子串
               
             
           </h1>
@@ -346,12 +347,34 @@
                 
               
 
-              <time title="创建时间：2018-06-08 23:12:19" itemprop="dateCreated datePublished" datetime="2018-06-08T23:12:19+08:00">2018-06-08</time>
+              <time title="创建时间：2018-06-09 10:51:17 / 修改时间：14:29:35" itemprop="dateCreated datePublished" datetime="2018-06-09T10:51:17+08:00">2018-06-09</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -380,16 +403,10 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。<br>示例 1：<br>输入: “babad”<br>输出: “bab”<br>注意: “aba”也是一个有效答案。</p>
+<p>示例 2：<br>输入: “cbbd”<br>输出: “bb”</p>
+<h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><h3 id="逆向DP"><a href="#逆向DP" class="headerlink" title="逆向DP"></a>逆向DP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">boolean</span> [][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span> [len+<span class="number">1</span>][len+<span class="number">1</span>];</span><br><span class="line">        String longStr = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = len-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; len; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s.charAt(i) == s.charAt(j) &amp;&amp; (j-i&lt;=<span class="number">1</span> || dp[i+<span class="number">1</span>][j-<span class="number">1</span>]))&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">if</span>(longStr.length() &lt; s.substring(i, j+<span class="number">1</span>).length())&#123;</span><br><span class="line">                        longStr = s.substring(i, j+<span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> longStr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="正向DP"><a href="#正向DP" class="headerlink" title="正向DP"></a>正向DP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> len = s.length();</span><br><span class="line">       <span class="keyword">boolean</span> [][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span> [len+<span class="number">1</span>][len+<span class="number">1</span>];</span><br><span class="line">       String longStr = <span class="string">""</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)&#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt;= <span class="number">1</span>; j--)&#123;</span><br><span class="line">               <span class="keyword">if</span>(s.charAt(i-<span class="number">1</span>) == s.charAt(j-<span class="number">1</span>) &amp;&amp; (i-j&lt;=<span class="number">1</span> || dp[i-<span class="number">1</span>][j+<span class="number">1</span>]))&#123;</span><br><span class="line">                   dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                   <span class="keyword">if</span>(longStr.length() &lt; s.substring(j-<span class="number">1</span>, i).length())&#123;</span><br><span class="line">                       longStr = s.substring(j-<span class="number">1</span>, i);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> longStr;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -407,6 +424,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+        </div>
+      
 
       
       
@@ -416,14 +441,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/06/09/DP-单词拆分 I/" rel="next" title="DP-单词拆分 I">
+                <i class="fa fa-chevron-left"></i> DP-单词拆分 I
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/09/DP-单词拆分 I/" rel="prev" title="DP-单词拆分 I">
-                DP-单词拆分 I <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/09/DP+回溯-单词拆分 II/" rel="prev" title="DP+回溯-单词拆分 II">
+                DP+回溯-单词拆分 II <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -588,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思路"><span class="nav-number">1.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆向DP"><span class="nav-number">1.2.</span> <span class="nav-text">逆向DP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正向DP"><span class="nav-number">1.3.</span> <span class="nav-text">正向DP</span></a></li></ol></li></ol></div>
             
 
           </div>
