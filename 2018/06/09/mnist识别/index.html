@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="minist_mpl.py1234567891011121314151617181920212223242526272829303132333435#encoding:utf-8import kerasfrom keras.datasets import mnistfrom keras.models import Sequentialfrom keras.layers import Dense,A">
+<meta name="keywords" content="深度学习,Keras">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mnist识别">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/mnist识别/index.html">
+<meta property="og:site_name" content="ResultLv">
+<meta property="og:description" content="minist_mpl.py1234567891011121314151617181920212223242526272829303132333435#encoding:utf-8import kerasfrom keras.datasets import mnistfrom keras.models import Sequentialfrom keras.layers import Dense,A">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-09T08:28:36.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mnist识别">
+<meta name="twitter:description" content="minist_mpl.py1234567891011121314151617181920212223242526272829303132333435#encoding:utf-8import kerasfrom keras.datasets import mnistfrom keras.models import Sequentialfrom keras.layers import Dense,A">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/09/mnist识别/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mnist识别 | ResultLv</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ResultLv</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/mnist识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Result Lv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ResultLv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mnist识别
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-09 16:24:46 / 修改时间：16:28:36" itemprop="dateCreated datePublished" datetime="2018-06-09T16:24:46+08:00">2018-06-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="minist-mpl-py"><a href="#minist-mpl-py" class="headerlink" title="minist_mpl.py"></a>minist_mpl.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense,Activation,Dropout</span><br><span class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> SGD,Adadelta</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> save_model</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">(x_train,y_train),(x_test,y_test) = mnist.load_data()</span><br><span class="line">x_train = x_train.reshape(<span class="number">60000</span>,<span class="number">28</span>*<span class="number">28</span>).astype(<span class="string">'float32'</span>)  <span class="comment">#转换数据格式</span></span><br><span class="line">x_test = x_test.reshape(<span class="number">10000</span>,<span class="number">28</span>*<span class="number">28</span>).astype(<span class="string">'float32'</span>)</span><br><span class="line"></span><br><span class="line">x_train /= <span class="number">255</span>   <span class="comment">#训练数据归一化</span></span><br><span class="line">x_test /= <span class="number">255</span></span><br><span class="line"></span><br><span class="line">y_train = keras.utils.to_categorical(y_train,<span class="number">10</span>)    <span class="comment">#one-hot编码</span></span><br><span class="line">y_test = keras.utils.to_categorical(y_test,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(x_train.shape,y_train.shape,x_test.shape,y_test.shape)</span><br><span class="line">modle = Sequential()</span><br><span class="line"><span class="comment">#第一层隐层，64个神经元</span></span><br><span class="line">modle.add(Dense(<span class="number">256</span>,activation=<span class="string">'relu'</span>,input_dim=<span class="number">28</span>*<span class="number">28</span>))</span><br><span class="line"><span class="comment">#第二层隐层，64个神经元</span></span><br><span class="line">modle.add(Dense(<span class="number">256</span>,activation=<span class="string">'relu'</span>))</span><br><span class="line">modle.add(Dropout(<span class="number">0.5</span>))</span><br><span class="line"><span class="comment">#输出层，10个神经元</span></span><br><span class="line">modle.add(Dense(<span class="number">10</span>,activation=<span class="string">'softmax'</span>))</span><br><span class="line"></span><br><span class="line">sgd = SGD(lr=<span class="number">0.01</span>,decay=<span class="number">1e-6</span>,momentum=<span class="number">0.9</span>,nesterov=<span class="keyword">True</span>)</span><br><span class="line">modle.compile(loss=<span class="string">'categorical_crossentropy'</span>,optimizer=<span class="string">'adagrad'</span>,metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line"></span><br><span class="line">modle.fit(x_train,y_train,epochs=<span class="number">10</span>,batch_size=<span class="number">128</span>)</span><br><span class="line">score = modle.evaluate(x_test,y_test,batch_size=<span class="number">128</span>)</span><br><span class="line">print(score)</span><br><span class="line">modle.save(<span class="string">'MLP_minist.h5'</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential,save_model</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense,Dropout,Flatten,Conv2D,MaxPooling2D</span><br><span class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> SGD,Adadelta</span><br><span class="line"></span><br><span class="line">(x_train,y_train),(x_test,y_test) = mnist.load_data()   <span class="comment">#加载数据</span></span><br><span class="line">print(x_train.shape,x_test.shape)</span><br><span class="line">x_train = x_train.reshape(<span class="number">60000</span>,<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>).astype(<span class="string">'float32'</span>)  <span class="comment">#二维数据</span></span><br><span class="line">x_test = x_test.reshape(<span class="number">10000</span>,<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>).astype(<span class="string">'float32'</span>)</span><br><span class="line"></span><br><span class="line">x_train /= <span class="number">255</span>  <span class="comment">#训练数据归一化</span></span><br><span class="line">x_test /= <span class="number">255</span></span><br><span class="line"></span><br><span class="line">y_train = keras.utils.to_categorical(y_train)    <span class="comment">#one-hot编码</span></span><br><span class="line">y_test = keras.utils.to_categorical(y_test)</span><br><span class="line">num_classes = y_test.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">model = Sequential()    <span class="comment">#创建序列模型</span></span><br><span class="line">model.add(Conv2D(<span class="number">64</span>,(<span class="number">3</span>,<span class="number">3</span>),activation=<span class="string">'relu'</span>,input_shape=(<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)))  <span class="comment">#第一层卷积层</span></span><br><span class="line">model.add(MaxPooling2D(pool_size=(<span class="number">2</span>,<span class="number">2</span>)))    <span class="comment">#池化层</span></span><br><span class="line"></span><br><span class="line">model.add(Conv2D(<span class="number">64</span>,(<span class="number">3</span>,<span class="number">3</span>),activation=<span class="string">'relu'</span>))  <span class="comment">#第二层卷积层</span></span><br><span class="line">model.add(MaxPooling2D(pool_size=(<span class="number">2</span>,<span class="number">2</span>)))    <span class="comment">#池化层</span></span><br><span class="line"></span><br><span class="line">model.add(Flatten())    <span class="comment">#铺平当前节点</span></span><br><span class="line"></span><br><span class="line">model.add(Dense(<span class="number">128</span>,activation=<span class="string">'relu'</span>))     <span class="comment">#全连接层</span></span><br><span class="line">model.add(Dropout(<span class="number">0.5</span>)) <span class="comment">#随机失活</span></span><br><span class="line">model.add(Dense(num_classes,activation=<span class="string">'softmax'</span>))</span><br><span class="line"></span><br><span class="line">model.compile(loss=<span class="string">'categorical_crossentropy'</span>,optimizer=<span class="string">'adam'</span>,metrics=[<span class="string">'accuracy'</span>])   <span class="comment">#编译模型</span></span><br><span class="line">model.fit(x_train,y_train,batch_size=<span class="number">128</span>,epochs=<span class="number">10</span>)     <span class="comment">#训练模型</span></span><br><span class="line">score = model.evaluate(x_test,y_test,batch_size=<span class="number">128</span>)    <span class="comment">#评价模型</span></span><br><span class="line"></span><br><span class="line">print(score)    <span class="comment">#打印分类准确率</span></span><br><span class="line"></span><br><span class="line">model.save(<span class="string">'CNN_minist.h5'</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/Keras/" rel="tag"># Keras</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/09/Java继承类/" rel="next" title="Java继承类">
+                <i class="fa fa-chevron-left"></i> Java继承类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/09/机器学习相关/" rel="prev" title="机器学习相关">
+                机器学习相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Result Lv</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ResultLv" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:553666725@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#minist-mpl-py"><span class="nav-number">1.</span> <span class="nav-text">minist_mpl.py</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Result Lv</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

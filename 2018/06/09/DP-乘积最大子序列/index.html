@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记">
+  <meta name="description" content="题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。">
 <meta name="keywords" content="LeetCode,动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP-乘积最大子序列">
 <meta property="og:url" content="http://yoursite.com/2018/06/09/DP-乘积最大子序列/index.html">
 <meta property="og:site_name" content="ResultLv">
-<meta property="og:description" content="题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记">
+<meta property="og:description" content="题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-09T06:28:09.765Z">
+<meta property="og:updated_time" content="2018-06-09T07:11:45.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-乘积最大子序列">
-<meta name="twitter:description" content="题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记">
+<meta name="twitter:description" content="题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。">
 
 
 
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 14:18:02 / 修改时间：14:28:09" itemprop="dateCreated datePublished" datetime="2018-06-09T14:18:02+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 14:18:02 / 修改时间：15:11:45" itemprop="dateCreated datePublished" datetime="2018-06-09T14:18:02+08:00">2018-06-09</time>
             
 
             
@@ -404,9 +404,9 @@
 
       
         <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。<br>示例 1:<br>输入: [2,3,-2,4]<br>输出: 6<br>解释: 子数组 [2,3] 有最大乘积 6。</p>
-<p>示例 2:<br>输入: [-2,0,-1]<br>输出: 0<br>解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。</p>
+<p>示例 2:<br>输入: [-2,0,-1]<br>输出: 0<br>解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。<br><a id="more"></a></p>
 <h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><p>本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数<em>正数和负数</em>负数得到，因此，需要同时记录下最大值和最小值。<br>状态转移方程：<br>dp[i] = max(max,dp[i-1])<br>max = max(max<em>num[i],min</em>num[i],nums[i])<br>min = min(max<em>num[i],min</em>num[i],nums[i])<br>其中，dp[i]表示前i个数中的最大乘积，maxm表示以第i-1个字符结尾的最大乘积,minm表示以第i-1个字符结尾的最小乘积,nums[i]即为第i个数。</p>
-<h4 id="DP实现"><a href="#DP实现" class="headerlink" title="DP实现"></a>DP实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span> [nums.length];</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> max = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> min = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">                max = Math.max(nums[i], max*nums[i]);</span><br><span class="line">                min = Math.min(nums[i], min*nums[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = max;</span><br><span class="line">                max = Math.max(nums[i], min*nums[i]);</span><br><span class="line">                min = Math.min(nums[i], temp*nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            dp[i] = Math.max(max, dp[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[nums.length-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="DP实现"><a href="#DP实现" class="headerlink" title="DP实现"></a>DP实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span> [nums.length];</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> max = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> min = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">                max = Math.max(nums[i], max*nums[i]);</span><br><span class="line">                min = Math.min(nums[i], min*nums[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = max;</span><br><span class="line">                max = Math.max(nums[i], min*nums[i]);</span><br><span class="line">                min = Math.min(nums[i], temp*nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            dp[i] = Math.max(max, dp[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[nums.length-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -441,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/09/最大上升子序列LIS/" rel="next" title="DP-最大上升子序列LIS">
-                <i class="fa fa-chevron-left"></i> DP-最大上升子序列LIS
+              <a href="/2018/06/09/DP-最长递增子序列的个数/" rel="next" title="DP-最长递增子序列的个数">
+                <i class="fa fa-chevron-left"></i> DP-最长递增子序列的个数
               </a>
             
           </div>
@@ -451,8 +451,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/09/DP-最长递增子序列的个数/" rel="prev" title="DP-最长递增子序列的个数">
-                DP-最长递增子序列的个数 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/09/分糖果/" rel="prev" title="分糖果">
+                分糖果 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,7 +527,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -544,7 +544,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -567,7 +579,29 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -617,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思路"><span class="nav-number">1.1.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DP实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">DP实现</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思路"><span class="nav-number">1.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP实现"><span class="nav-number">1.2.</span> <span class="nav-text">DP实现</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="ResultLv">
 <meta property="og:description" content="题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-09T06:31:43.519Z">
+<meta property="og:updated_time" content="2018-06-09T07:11:55.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-最长递增子序列的个数">
 <meta name="twitter:description" content="题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整">
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 14:18:02 / 修改时间：14:31:43" itemprop="dateCreated datePublished" datetime="2018-06-09T14:18:02+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 14:18:02 / 修改时间：15:11:55" itemprop="dateCreated datePublished" datetime="2018-06-09T14:18:02+08:00">2018-06-09</time>
             
 
             
@@ -406,6 +406,7 @@
         <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个未排序的整数数组，找到最长递增子序列的个数。<br>示例 1:<br>输入: [1,3,5,4,7]<br>输出: 2<br>解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。</p>
 <p>示例 2:<br>输入: [2,2,2,2,2]<br>输出: 5<br>解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。</p>
 <p>注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。</p>
+<a id="more"></a>
 <h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><h3 id="O-n-2-解法，DP实现"><a href="#O-n-2-解法，DP实现" class="headerlink" title="O(n^2)解法，DP实现"></a>O(n^2)解法，DP实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">cclass Solution &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findNumberOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span> [nums.length];</span><br><span class="line">        <span class="keyword">int</span> [] count = <span class="keyword">new</span> <span class="keyword">int</span> [nums.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            dp[i] = count[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &gt; nums[j])&#123;</span><br><span class="line">                    <span class="keyword">if</span>(dp[i] &lt; dp[j] + <span class="number">1</span>)&#123;</span><br><span class="line">                        dp[i] = dp[j] + <span class="number">1</span>;</span><br><span class="line">                        count[i] = count[j];</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(dp[i] == dp[j] + <span class="number">1</span>)&#123;   <span class="comment">//统计当前长度子序列可由多少次长序列加1得到</span></span><br><span class="line">                        count[i] += count[j];</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            maxLen = Math.max(maxLen, dp[i]);</span><br><span class="line">            <span class="comment">// System.out.println(count[i] + " " + dp[i]);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count.length; i++)&#123;  <span class="comment">// 考虑重复情况</span></span><br><span class="line">            <span class="keyword">if</span>(dp[i] == maxLen) res += count[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count[nums.length-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -441,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/09/DP-乘积最大子序列/" rel="next" title="DP-乘积最大子序列">
-                <i class="fa fa-chevron-left"></i> DP-乘积最大子序列
+              <a href="/2018/06/09/DFS-括号生成/" rel="next" title="DFS-括号生成">
+                <i class="fa fa-chevron-left"></i> DFS-括号生成
               </a>
             
           </div>
@@ -451,8 +452,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/09/DFS-括号生成/" rel="prev" title="DFS-括号生成">
-                DFS-括号生成 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/09/DP-乘积最大子序列/" rel="prev" title="DP-乘积最大子序列">
+                DP-乘积最大子序列 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,7 +528,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -544,7 +545,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -567,7 +580,29 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
