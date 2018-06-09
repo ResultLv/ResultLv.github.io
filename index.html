@@ -347,7 +347,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 16:39:52 / 修改时间：16:38:17" itemprop="dateCreated datePublished" datetime="2018-06-09T16:39:52+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 16:39:52 / 修改时间：20:17:05" itemprop="dateCreated datePublished" datetime="2018-06-09T16:39:52+08:00">2018-06-09</time>
             
 
             
@@ -509,7 +509,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 16:30:11 / 修改时间：17:35:58" itemprop="dateCreated datePublished" datetime="2018-06-09T16:30:11+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 16:30:11 / 修改时间：19:53:00" itemprop="dateCreated datePublished" datetime="2018-06-09T16:30:11+08:00">2018-06-09</time>
             
 
             
@@ -566,7 +566,7 @@
 
       
         
-          <h2 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h2><p>集成学习（Ensemble learning）通过组合几种模型来提高机器学习的效果。与单一模型相比，该方法可以提供更好的预测结果。集成方法是将几种机器学习技术组合成一个预测模型的元算法，以达到减小方差（bagging）、偏差（boosting）或改进预测（stacking）的效果</p>
+          <h2 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h2><p>集成学习（Ensemble learning）通过组合几种模型来提高机器学习的效果。与单一模型相比，该方法可以提供更好的预测结果。集成方法是将几种机器学习技术组合成一个预测模型的元算法，以达到减小方差（bagging）、偏差（boosting）或改进预测（stacking）的效果<br>$$<br>\left\lbrace<br>\sum_{i=0}^{n}i^{2}=\frac{2a}{x^2+1}<br>\right\rbrace<br>$$</p>
 <h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><p>Bagging 是 bootstrap aggregation 的缩写。通过对训练样本重新采样的方法得到不同的训练样本集，在这些新的训练样本集上分别训练学习器，最终合并每一个学习器的结果，作为最终的学习结果，Bagging方法的具体过程如下图所示：<br><img src="http://img1.ph.126.net/2SQWgzFB-8DEOeD4mIvoLw==/1913466891779385955.png" alt=""><br>在Bagging方法中，最重要的算法为随机森林Random Forest算法。<br>在随机森林中，集成中的每棵树都是由从训练集中抽取的样本（即 bootstrap 样本）构建的。另外，与使用所有特征不同，这里随机选择特征子集，从而进一步达到对树的随机化目的。而最终结果采用Bagging的策略来获得，即多数投票机制<br>因此，随机森林产生的偏差略有增加，但是由于对相关性较小的树计算平均值，估计方差减小了，导致模型的整体效果更好</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1635,7 +1635,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 15:30:58 / 修改时间：15:48:54" itemprop="dateCreated datePublished" datetime="2018-06-09T15:30:58+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 15:30:58 / 修改时间：20:31:04" itemprop="dateCreated datePublished" datetime="2018-06-09T15:30:58+08:00">2018-06-09</time>
             
 
             
@@ -1798,7 +1798,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 14:35:07 / 修改时间：15:28:32" itemprop="dateCreated datePublished" datetime="2018-06-09T14:35:07+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 14:35:07 / 修改时间：20:57:37" itemprop="dateCreated datePublished" datetime="2018-06-09T14:35:07+08:00">2018-06-09</time>
             
 
             
@@ -1855,7 +1855,9 @@
 
       
         
-          <h3 id="最长公共子串"><a href="#最长公共子串" class="headerlink" title="最长公共子串"></a>最长公共子串</h3><h3 id="DP实现"><a href="#DP实现" class="headerlink" title="DP实现"></a>DP实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxSubStr</span><span class="params">(String str1, String str2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> len1 = str1.length();</span><br><span class="line">	<span class="keyword">int</span> len2 = str2.length();</span><br><span class="line">	<span class="keyword">int</span> [][] dp = <span class="keyword">new</span> <span class="keyword">int</span> [len1][len2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len1; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len2; ++j) &#123;</span><br><span class="line">			<span class="keyword">if</span>(str1.charAt(i) == str2.charAt(j)) &#123;</span><br><span class="line">				<span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">					dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;	<span class="comment">// 状态转移</span></span><br><span class="line">					<span class="keyword">if</span>(dp[i][j] &gt; result) &#123;</span><br><span class="line">						result = dp[i][j];</span><br><span class="line">						index = i;	<span class="comment">// 记录最大子串的最后一个下标</span></span><br><span class="line">					&#125;</span><br><span class="line">				<span class="comment">//	result = result &gt; dp[i][j] ? result : dp[i][j];	</span></span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					dp[i][j] = <span class="number">1</span>;</span><br><span class="line">					result = result &gt; dp[i][j] ? result : dp[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	System.out.println(result);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = index - result + <span class="number">1</span>; i &lt;= index; i++) &#123;</span><br><span class="line">		System.out.print(str1.charAt(i) + <span class="string">" "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h3 id="最长公共子串"><a href="#最长公共子串" class="headerlink" title="最长公共子串"></a>最长公共子串</h3><p><img src="assets/081950012995058.png" alt=""></p>
+<p><img src="assets/081950460499853.png" alt=""></p>
+<h3 id="DP实现"><a href="#DP实现" class="headerlink" title="DP实现"></a>DP实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxSubStr</span><span class="params">(String str1, String str2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> len1 = str1.length();</span><br><span class="line">	<span class="keyword">int</span> len2 = str2.length();</span><br><span class="line">	<span class="keyword">int</span> [][] dp = <span class="keyword">new</span> <span class="keyword">int</span> [len1][len2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len1; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len2; ++j) &#123;</span><br><span class="line">			<span class="keyword">if</span>(str1.charAt(i) == str2.charAt(j)) &#123;</span><br><span class="line">				<span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">					dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;	<span class="comment">// 状态转移</span></span><br><span class="line">					<span class="keyword">if</span>(dp[i][j] &gt; result) &#123;</span><br><span class="line">						result = dp[i][j];</span><br><span class="line">						index = i;	<span class="comment">// 记录最大子串的最后一个下标</span></span><br><span class="line">					&#125;</span><br><span class="line">				<span class="comment">//	result = result &gt; dp[i][j] ? result : dp[i][j];	</span></span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					dp[i][j] = <span class="number">1</span>;</span><br><span class="line">					result = result &gt; dp[i][j] ? result : dp[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	System.out.println(result);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = index - result + <span class="number">1</span>; i &lt;= index; i++) &#123;</span><br><span class="line">		System.out.print(str1.charAt(i) + <span class="string">" "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/09/最长公共子串-最长公共子序列/#more" rel="contents">
@@ -2242,6 +2244,59 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
   

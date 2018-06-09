@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="ResultLv">
 <meta property="og:description" content="题目描述 分糖果：科大讯飞第二道编程题 小明和小红是好朋友，但最近遇到一个棘手的问题，有一盒糖果要分成两份但是每颗糖果质量都不尽相同， 但为了分配的公平每份糖的糖果数量相差不得超过1，在此条件下两份糖果的质量差距尽可能小。 输入一行数，包含一个数n，代表糖果数量，后面一次是n个整数一次表示每个糖果的质量，每个糖果的质量都是1到450 之间的一个整数，每盒最多有20个糖果。 输出：每个样例输出两个数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-09T07:12:13.862Z">
+<meta property="og:updated_time" content="2018-06-09T11:32:11.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分糖果">
 <meta name="twitter:description" content="题目描述 分糖果：科大讯飞第二道编程题 小明和小红是好朋友，但最近遇到一个棘手的问题，有一盒糖果要分成两份但是每颗糖果质量都不尽相同， 但为了分配的公平每份糖的糖果数量相差不得超过1，在此条件下两份糖果的质量差距尽可能小。 输入一行数，包含一个数n，代表糖果数量，后面一次是n个整数一次表示每个糖果的质量，每个糖果的质量都是1到450 之间的一个整数，每盒最多有20个糖果。 输出：每个样例输出两个数">
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="创建时间：2018-06-09 14:35:07 / 修改时间：15:12:13" itemprop="dateCreated datePublished" datetime="2018-06-09T14:35:07+08:00">2018-06-09</time>
+              <time title="创建时间：2018-06-09 14:35:07 / 修改时间：19:32:11" itemprop="dateCreated datePublished" datetime="2018-06-09T14:35:07+08:00">2018-06-09</time>
             
 
             
@@ -412,9 +412,9 @@
 <li>输出：每个样例输出两个数字分别为两堆糖果的质量，如不相同，先小后大。</li>
 <li>样例：输入：5 9 6 5 8 7</li>
 <li>输出：17 18</li>
-<li><a id="more"></a>
-<h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3>回溯，在数量差值为1的结果中找出最小的质量差</li>
 </ul>
+<a id="more"></a>
+<h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>回溯，在数量差值为1的结果中找出最小的质量差</p>
 <h3 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">divide</span><span class="params">(candies, num, select, sum, total, index)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> min</span><br><span class="line">    <span class="keyword">global</span> res</span><br><span class="line">    <span class="keyword">if</span>(abs(total-sum*<span class="number">2</span>) &lt; min):</span><br><span class="line">        res = sum</span><br><span class="line">        min = abs(total-sum*<span class="number">2</span>)</span><br><span class="line">        result.append(select)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(candies)):</span><br><span class="line">        <span class="keyword">if</span>(index == num<span class="number">-1</span>): return3</span><br><span class="line">        select.append(candies[index])</span><br><span class="line">        sum += candies[index]</span><br><span class="line">        temp = select.copy()</span><br><span class="line">        <span class="keyword">if</span>(len(select) &lt;= int(num/<span class="number">2</span>)+<span class="number">1</span>):</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">            divide(candies, num, temp, sum, total, index)</span><br><span class="line">        sum -= select[len(select) - <span class="number">1</span>]</span><br><span class="line">        select.remove(select[len(select)<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -450,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/09/DFS-括号生成/" rel="next" title="DFS-括号生成">
-                <i class="fa fa-chevron-left"></i> DFS-括号生成
+              <a href="/2018/06/09/最大上升子序列LIS/" rel="next" title="DP-最大上升子序列LIS">
+                <i class="fa fa-chevron-left"></i> DP-最大上升子序列LIS
               </a>
             
           </div>
@@ -852,6 +852,37 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
   
