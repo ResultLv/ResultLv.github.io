@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="整数拆分给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。注意：你可以假设 n 不小于2且不大于58。 算法思想10 = (3 + 3 + 4)——&amp;gt; 10 = (6 + 4)任意大于等于2的正整数n都可以拆分为两个正整数之">
+  <meta name="description" content="整数拆分给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。注意：你可以假设 n 不小于2且不大于58。 算法思想任意大于等于2的正整数n都可以拆分为两个正整数之和，可以用dp数组存放n拆分后的乘积最大值，10 = 3 + 3 +">
 <meta name="keywords" content="LeetCode,动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="整数拆分">
 <meta property="og:url" content="http://yoursite.com/2018/06/20/整数拆分/index.html">
 <meta property="og:site_name" content="ResultLv">
-<meta property="og:description" content="整数拆分给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。注意：你可以假设 n 不小于2且不大于58。 算法思想10 = (3 + 3 + 4)——&amp;gt; 10 = (6 + 4)任意大于等于2的正整数n都可以拆分为两个正整数之">
+<meta property="og:description" content="整数拆分给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。注意：你可以假设 n 不小于2且不大于58。 算法思想任意大于等于2的正整数n都可以拆分为两个正整数之和，可以用dp数组存放n拆分后的乘积最大值，10 = 3 + 3 +">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-20T05:17:06.683Z">
+<meta property="og:updated_time" content="2018-06-20T05:43:08.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="整数拆分">
-<meta name="twitter:description" content="整数拆分给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。注意：你可以假设 n 不小于2且不大于58。 算法思想10 = (3 + 3 + 4)——&amp;gt; 10 = (6 + 4)任意大于等于2的正整数n都可以拆分为两个正整数之">
+<meta name="twitter:description" content="整数拆分给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。注意：你可以假设 n 不小于2且不大于58。 算法思想任意大于等于2的正整数n都可以拆分为两个正整数之和，可以用dp数组存放n拆分后的乘积最大值，10 = 3 + 3 +">
 
 
 
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2018-06-20 13:05:20 / 修改时间：13:17:06" itemprop="dateCreated datePublished" datetime="2018-06-20T13:05:20+08:00">2018-06-20</time>
+              <time title="创建时间：2018-06-20 13:05:20 / 修改时间：13:43:08" itemprop="dateCreated datePublished" datetime="2018-06-20T13:05:20+08:00">2018-06-20</time>
             
 
             
@@ -456,8 +456,8 @@
 
       
         <h2 id="整数拆分"><a href="#整数拆分" class="headerlink" title="整数拆分"></a>整数拆分</h2><p>给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。<br>例如，给定 n = 2，返回1（2 = 1 + 1）；给定 n = 10，返回36（10 = 3 + 3 + 4）。<br>注意：你可以假设 n 不小于2且不大于58。</p>
-<h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>10 = (3 + 3 + 4)——&gt; 10 = (6 + 4)<br>任意大于等于2的正整数n都可以拆分为两个正整数之和，可以用dp数组存放n拆分后的乘积最大值，10 = 3 + 3 + 4可以拆分为10 = 6 + 4, dp[10] = dp[6] + dp[4]，而dp[6]和dp[4]又可以继续划分为dp[3] <em> dp[3]和d[2] </em> dp[2]…满足最优子结构性质，状态转移方程如下：<br>$dp[n] = max(dp[i] * dp[n-i])    n∈(1,n/2)$</p>
-<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">integerBreak</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span> [n+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i/<span class="number">2</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[j] * dp[i-j] &gt;= dp[i])&#123;</span><br><span class="line">                    dp[i] = Math.max(dp[j] * dp[i-j], i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>任意大于等于2的正整数n都可以拆分为两个正整数之和，可以用dp数组存放n拆分后的乘积最大值，10 = 3 + 3 + 4可以拆分为10 = 6 + 4, dp[10] = dp[6] + dp[4]，而dp[6]和dp[4]又可以继续划分为dp[3] <em> dp[3]和d[2] </em> dp[2]…满足最优子结构性质，状态转移方程如下：<br>$dp[n] = max\langle dp[1]\cdot dp[n-1], dp[2]\cdot dp[n-2]\cdots dp[i]\cdot dp[n-i]\rangle$</p>
+<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">integerBreak</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span> [n+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;	</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i/<span class="number">2</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[j] * dp[i-j] &gt;= dp[i])&#123;</span><br><span class="line">                    dp[i] = Math.max(dp[j] * dp[i-j], i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
