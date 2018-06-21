@@ -108,21 +108,27 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="一、重大核心变化包括 Tensor/Variable 合并 零维张量 数据类型 迁移指南  二、现添加的新特征包括 Tensors： 全面支持高级索引 快速傅立叶变换 神经网络： 计算时的存储权衡 bottleneck-识别代码中热点（hotspots）的工具 torch.distributions 24 个基础的概率分布 增加cdf、方差、信息熵、困惑度等 分布式训练">
+<meta name="keywords" content="PyTorch,深度学习,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch0.4.0更新">
+<meta property="og:url" content="http://yoursite.com/2018/06/21/Pytorch0.4.0更新/index.html">
 <meta property="og:site_name" content="ResultLv">
+<meta property="og:description" content="一、重大核心变化包括 Tensor/Variable 合并 零维张量 数据类型 迁移指南  二、现添加的新特征包括 Tensors： 全面支持高级索引 快速傅立叶变换 神经网络： 计算时的存储权衡 bottleneck-识别代码中热点（hotspots）的工具 torch.distributions 24 个基础的概率分布 增加cdf、方差、信息熵、困惑度等 分布式训练">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-09T05:51:56.757Z">
+<meta property="og:image" content="http://img0.ph.126.net/CToULoCCx_lmxB2-e1IPCg==/5717505544412384805.png">
+<meta property="og:updated_time" content="2018-06-21T09:03:46.023Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Categories">
+<meta name="twitter:title" content="Pytorch0.4.0更新">
+<meta name="twitter:description" content="一、重大核心变化包括 Tensor/Variable 合并 零维张量 数据类型 迁移指南  二、现添加的新特征包括 Tensors： 全面支持高级索引 快速傅立叶变换 神经网络： 计算时的存储权衡 bottleneck-识别代码中热点（hotspots）的工具 torch.distributions 24 个基础的概率分布 增加cdf、方差、信息熵、困惑度等 分布式训练">
+<meta name="twitter:image" content="http://img0.ph.126.net/CToULoCCx_lmxB2-e1IPCg==/5717505544412384805.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/21/Pytorch0.4.0更新/"/>
 
 
 
@@ -132,7 +138,7 @@
   };
 </script>
 
-  <title>Categories | ResultLv</title>
+  <title>Pytorch0.4.0更新 | ResultLv</title>
   
 
 
@@ -240,7 +246,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
@@ -323,116 +329,246 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/Pytorch0.4.0更新/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Result Lv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img1.ph.126.net/SYHjasxUSqeIAy31uB-Pzg==/6597742667775025270.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ResultLv">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">Categories</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                目前共计 9 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PyTorch/">PyTorch</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pytorch/">Pytorch</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/项目/">项目</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">Pytorch0.4.0更新
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-21 16:55:17 / 修改时间：17:03:46" itemprop="dateCreated datePublished" datetime="2018-06-21T16:55:17+08:00">2018-06-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PyTorch/" itemprop="url" rel="index"><span itemprop="name">PyTorch</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h3 id="一、重大核心变化包括"><a href="#一、重大核心变化包括" class="headerlink" title="一、重大核心变化包括"></a>一、重大核心变化包括</h3><ul>
+<li>Tensor/Variable 合并</li>
+<li>零维张量</li>
+<li>数据类型</li>
+<li>迁移指南</li>
+</ul>
+<h3 id="二、现添加的新特征包括"><a href="#二、现添加的新特征包括" class="headerlink" title="二、现添加的新特征包括"></a>二、现添加的新特征包括</h3><ul>
+<li>Tensors：</li>
+<li>全面支持高级索引</li>
+<li>快速傅立叶变换</li>
+<li>神经网络：</li>
+<li>计算时的存储权衡</li>
+<li>bottleneck-识别代码中热点（hotspots）的工具</li>
+<li>torch.distributions</li>
+<li>24 个基础的概率分布</li>
+<li>增加cdf、方差、信息熵、困惑度等</li>
+<li>分布式训练<a id="more"></a></li>
+<li>易于使用的 Launcher utility</li>
+<li>NCCL2 后端</li>
+<li>C++拓展</li>
+<li>Windows 支持</li>
+<li>ONNX 改进</li>
+<li>RNN 支持</li>
+</ul>
+<h3 id="三、性能改进"><a href="#三、性能改进" class="headerlink" title="三、性能改进"></a>三、性能改进</h3><h3 id="四、Bug-修复"><a href="#四、Bug-修复" class="headerlink" title="四、Bug 修复"></a>四、Bug 修复</h3><h3 id="五、torchvision的一些变化"><a href="#五、torchvision的一些变化" class="headerlink" title="五、torchvision的一些变化"></a>五、torchvision的一些变化</h3><p>1.torchvision.transform中函数<code>torchvision.transforms.`</code>Scale<code>(*args, **kwargs)即将被函数</code>torchvision.transforms.<code></code>Resize`(size, interpolation=2)代替。（参考官方文档：<a href="http://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.Resize" target="_blank" rel="noopener">点击打开链接</a>）</p>
+<p>2.torchvision.transform中函数<code>torchvision.transforms.`</code>RandomSizedCrop<code>(*args, **kwargs)即将被函数</code>torchvision.transforms.<code></code>RandomResizedCrop`(size, scale=(0.08, 1.0), ratio=(0.75, 1.3333333333333333), interpolation=2)代替。（参考官方文档：<a href="http://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.RandomResizedCrop" target="_blank" rel="noopener">点击打开链接</a>）</p>
+<h3 id="六、安装方式——Windows安装"><a href="#六、安装方式——Windows安装" class="headerlink" title="六、安装方式——Windows安装"></a>六、安装方式——Windows安装</h3><p>【方法一】pip直接安装。官网（<a href="http://pytorch.org/" target="_blank" rel="noopener">点击打开链接</a>）给出的安装步骤如下图所示（根据CUDA版本以及Python版本选择）。</p>
+<p><img src="http://img0.ph.126.net/CToULoCCx_lmxB2-e1IPCg==/5717505544412384805.png" alt=""></p>
+<p>Run this command:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-win_amd64.whl </span><br><span class="line">pip3 install torchvision</span><br></pre></td></tr></table></figure>
+<p>这里我是下载好torch-0.4.0-cp36-cp36m-win_amd64.whl文件到本地之后才安装的。<br>进入Anaconda Prompt，然后进入文件所在目录：</p>
+<p>1.打开cmd命令提示符，先利用anaconda创建一个虚拟环境，命名为pytorch4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch4 python=3.6</span><br></pre></td></tr></table></figure></p>
+<p>2.激活刚才创建好的虚拟环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate pytorch4</span><br></pre></td></tr></table></figure></p>
+<p>3.安装pytorch0.4.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch-0.4.0-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
+<p>注：根据自己的配置选择whl下载来链接</p>
+<p>4.安装torchvision<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torchvision</span><br></pre></td></tr></table></figure></p>
+<p>简单测试安装是否成功<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.__version__)</span><br></pre></td></tr></table></figure></p>
+<p>如果输出0.4.0，那么恭喜Windows下的PyTorch0.4.0安装成功！</p>
+
       
     </div>
+
     
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PyTorch/" rel="tag"># PyTorch</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/整数拆分/" rel="next" title="整数拆分">
+                <i class="fa fa-chevron-left"></i> 整数拆分
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/21/Pytorch0-4-0入门教程/" rel="prev" title="Pytorch0.4.0入门教程">
+                Pytorch0.4.0入门教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    
-    
-    
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -462,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -624,6 +769,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、重大核心变化包括"><span class="nav-number">1.</span> <span class="nav-text">一、重大核心变化包括</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、现添加的新特征包括"><span class="nav-number">2.</span> <span class="nav-text">二、现添加的新特征包括</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、性能改进"><span class="nav-number">3.</span> <span class="nav-text">三、性能改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Bug-修复"><span class="nav-number">4.</span> <span class="nav-text">四、Bug 修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、torchvision的一些变化"><span class="nav-number">5.</span> <span class="nav-text">五、torchvision的一些变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、安装方式——Windows安装"><span class="nav-number">6.</span> <span class="nav-text">六、安装方式——Windows安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1214,7 +1375,7 @@
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script type="text/javascript">
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script>
 
