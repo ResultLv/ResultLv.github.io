@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="ResultLv">
 <meta property="og:description" content="单链表123456// 单链表节点定义public class ListNode &amp;#123;   int val;   ListNode next;   ListNode(int x) &amp;#123; val = x; &amp;#125;&amp;#125; 删除链表中的节点删除链表中等于给定值 val 的所有节点。 示例:输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-28T14:04:31.801Z">
+<meta property="og:updated_time" content="2018-06-28T14:26:17.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表算法题">
 <meta name="twitter:description" content="单链表123456// 单链表节点定义public class ListNode &amp;#123;   int val;   ListNode next;   ListNode(int x) &amp;#123; val = x; &amp;#125;&amp;#125; 删除链表中的节点删除链表中等于给定值 val 的所有节点。 示例:输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6,">
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2018-06-28 21:56:26 / 修改时间：22:04:31" itemprop="dateCreated datePublished" datetime="2018-06-28T21:56:26+08:00">2018-06-28</time>
+              <time title="创建时间：2018-06-28 21:56:26 / 修改时间：22:26:17" itemprop="dateCreated datePublished" datetime="2018-06-28T21:56:26+08:00">2018-06-28</time>
             
 
             
@@ -460,6 +460,16 @@
 <p>示例:<br>输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6<br>输出: 1-&gt;2-&gt;3-&gt;4-&gt;5</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeElements</span><span class="params">(ListNode head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(head != <span class="keyword">null</span> &amp;&amp; head.val == val)&#123;    <span class="comment">// 找到第一个值不为val的节点作为头结点</span></span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        ListNode q = head, p = head.next;</span><br><span class="line">        <span class="keyword">while</span>(p != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p.val == val)&#123;</span><br><span class="line">                q.next = p.next;</span><br><span class="line">                p = q.next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                q = p;</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 大佬解法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeElements</span><span class="params">(ListNode head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        head.next = removeElements(head.next, val);</span><br><span class="line">        <span class="keyword">return</span> head.val == val ? head.next : head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除链表中的节点2"><a href="#删除链表中的节点2" class="headerlink" title="删除链表中的节点2"></a>删除链表中的节点2</h3><p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
+<p>示例 1:<br>输入: head = [4,5,1,9], node = 5<br>输出: [4,1,9]<br>解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>链表至少包含两个节点。</li>
+<li>链表中所有节点的值都是唯一的。</li>
+<li>给定的节点为非末尾节点并且一定是链表中的一个有效节点。</li>
+<li>不要从你的函数中返回任何结果。</li>
+</ul>
+<h4 id="可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点"><a href="#可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点" class="headerlink" title="可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点"></a>可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        node.val = node.next.val;</span><br><span class="line">        node.next = node.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -742,7 +752,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除链表中的节点"><span class="nav-number">1.</span> <span class="nav-text">删除链表中的节点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除链表中的节点"><span class="nav-number">1.</span> <span class="nav-text">删除链表中的节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除链表中的节点2"><span class="nav-number">2.</span> <span class="nav-text">删除链表中的节点2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点"><span class="nav-number">2.1.</span> <span class="nav-text">可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点</span></a></li></ol></li></ol></div>
             
 
           </div>
