@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[面试题19：正则表达式匹配]]></title>
     <url>%2F2018%2F06%2F28%2FAtarashii%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个字符串 (s) 和一个字符模式 (p)。实现支持 ‘.’ 和 ‘*’ 的正则表达式匹配。 ‘.’ 匹配任意单个字符。 ‘*’ 匹配零个或多个前面的元素。 匹配应该覆盖整个字符串 (s) ，而不是部分字符串。 说明:s 可能为空，且只包含从 a-z 的小写字母。p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。 示例 1:输入:s = “aaa”p = “a“输出: true解释: ‘‘ 代表可匹配零个或多个前面的元素, 即可以匹配 ‘a’ 。因此, 重复 ‘a’ 两次, 字符串可变为 “aaa”。 示例 2:输入:s = “abcd”p = “.“输出: true解释: “.“ 表示可匹配零个或多个(‘*’)任意字符(‘.’)。 示例 3:输入:s = “aab”p = “cab”输出: true解释: ‘c’ 可以不被匹配, ‘a’ 可以被重复一次。因此可以匹配字符串 “aab”。 示例 5:输入:s = “mississippi”p = “misisp*.”输出: false 递归解法给字符串和pattern各自设置下标，分两种情况进行匹配，一种是pattern的下一个字符为星号，一种是不为星号,同时考虑为空的边界情况。1234567891011121314151617181920212223class Solution &#123; public boolean match(String s, String p, int i, int j)&#123; if(i == s.length() &amp;&amp; j == p.length()) return true; if(i != s.length() &amp;&amp; j == p.length()) return false; if(j + 1 &lt; p.length() &amp;&amp; p.charAt(j+1) == '*')&#123; //如果模式下个字符为* if(i == s.length()) return match(s, p, i, j+2); // 字符串匹配到最后一位，结束当前模式 if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '.')&#123; return match(s, p, i+1, j) || match(s, p, i, j+2); // 匹配下一个字符或者抛弃这个星号去匹配下一个模式 &#125; return match(s, p, i, j+2); //直接放弃当前*号 &#125; if(i == s.length() &amp;&amp; j != p.length()) return false; if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '.')&#123; //字符串单个字符与模式单个字符或.匹配 return match(s, p, i+1, j+1); &#125; return false; &#125; public boolean isMatch(String s, String p) &#123; if(s.equals(p)) return true; if(p.length() == 0) return false; return match(s, p, 0, 0); &#125;&#125; 动态规划解法123456789101112131415161718class Solution &#123; public boolean isMatch(String s, String p) &#123; int n = s.length(), m = p.length(); char[] S = s.toCharArray(), P = p.toCharArray(); boolean[][] dp = new boolean[n+1][m+1]; dp[0][0] = true; for (int i = 0; i &lt;= n; i++) &#123; for (int j = 1; j &lt;= m; j++) &#123; if (j &gt; 1 &amp;&amp; P[j - 1] == '*') &#123; dp[i][j] = dp[i][j - 2] || (i &gt; 0 &amp;&amp; (S[i - 1] == P[j - 2] || P[j - 2] == '.') &amp;&amp; dp[i - 1][j]); &#125; else &#123; dp[i][j] = i &gt; 0 &amp;&amp; dp[i - 1][j - 1] &amp;&amp; (S[i - 1] == P[j - 1] || P[j - 1] == '.'); &#125; &#125; &#125; return dp[n][m]; &#125;&#125;]]></content>
+    <content type="text"><![CDATA[题目描述给定一个字符串 (s) 和一个字符模式 (p)。实现支持 ‘.’ 和 ‘*‘ 的正则表达式匹配。 ‘.’ 匹配任意单个字符。 ‘*’ 匹配零个或多个前面的元素。 匹配应该覆盖整个字符串 (s) ，而不是部分字符串。 说明:s 可能为空，且只包含从 a-z 的小写字母。p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。 示例 1:输入:s = “aaa”p = “a*“输出: true解释: “*“ 代表可匹配零个或多个前面的元素, 即可以匹配 ‘a’ 。因此, 重复 ‘a’ 两次, 字符串可变为 “aaa”。 示例 2:输入:s = “abcd”p = “.*“输出: true解释: “.*“ 表示可匹配零个或多个(‘*‘)任意字符(‘.’)。 示例 3:输入:s = “aab”p = “c*a*b”输出: true解释: ‘c’ 可以不被匹配, ‘a’ 可以被重复一次。因此可以匹配字符串 “aab”。 示例 5:输入:s = “mississippi”p = “mis*is*p*.”输出: false 递归解法给字符串和pattern各自设置下标，分两种情况进行匹配，一种是pattern的下一个字符为星号，一种是不为星号,同时考虑为空的边界情况。1234567891011121314151617181920212223class Solution &#123; public boolean match(String s, String p, int i, int j)&#123; if(i == s.length() &amp;&amp; j == p.length()) return true; if(i != s.length() &amp;&amp; j == p.length()) return false; if(j + 1 &lt; p.length() &amp;&amp; p.charAt(j+1) == '*')&#123; //如果模式串下个字符为* if(i == s.length()) return match(s, p, i, j+2); // 字符串匹配到最后一位，结束当前模式字符* if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '.')&#123; return match(s, p, i+1, j) || match(s, p, i, j+2); // 匹配下一个字符或者抛弃这个星号去匹配下一个模式 &#125; return match(s, p, i, j+2); //直接放弃当前*号 &#125; if(i == s.length() &amp;&amp; j != p.length()) return false; if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '.')&#123; //字符串单个字符与模式串单个字符或.匹配 return match(s, p, i+1, j+1); &#125; return false; &#125; public boolean isMatch(String s, String p) &#123; if(s.equals(p)) return true; if(p.length() == 0) return false; return match(s, p, 0, 0); &#125;&#125; 动态规划解法思路使用二维$dp$数组存放匹配状态，$S[]$为字符串字符数组,$P[]$为模式串字符数组，状态转移共有以下三种情况： $S[i] == P[j]$ -&gt; $dp[i][j] = dp[i-1][j-1]$ $P[j] == ‘.’$ -&gt; $dp[i][j] = dp[i-1][j-1]$ $P[j] == ‘*’$ -&gt; 还需分两种情况: $S[i] != P[j]$ -&gt; $dp[i][j] = dp[i][j-2]$ $S[i] == P[j]$: $dp[i][j] = dp[i-1][j]$ a*作为多个a $dp[i][j] = dp[i][j-2]$ a*作为空 123456789101112131415161718class Solution &#123; public boolean isMatch(String s, String p) &#123; int n = s.length(), m = p.length(); char[] S = s.toCharArray(), P = p.toCharArray(); boolean[][] dp = new boolean[n+1][m+1]; dp[0][0] = true; for (int i = 0; i &lt;= n; i++) &#123; for (int j = 1; j &lt;= m; j++) &#123; if (j &gt; 1 &amp;&amp; P[j - 1] == '*') &#123; dp[i][j] = dp[i][j - 2] || (i &gt; 0 &amp;&amp; (S[i - 1] == P[j - 2] || P[j - 2] == '.') &amp;&amp; dp[i - 1][j]); &#125; else &#123; dp[i][j] = i &gt; 0 &amp;&amp; dp[i - 1][j - 1] &amp;&amp; (S[i - 1] == P[j - 1] || P[j - 1] == '.'); &#125; &#125; &#125; return dp[n][m]; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -35,9 +35,9 @@
         <category>面试</category>
       </categories>
       <tags>
+        <tag>回溯</tag>
         <tag>面试题</tag>
         <tag>字符串</tag>
-        <tag>回溯</tag>
       </tags>
   </entry>
   <entry>
@@ -63,9 +63,9 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
+        <tag>回溯</tag>
         <tag>动态规划</tag>
         <tag>递归</tag>
-        <tag>回溯</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -166,18 +166,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java继承类]]></title>
-    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[链表实现]]></title>
     <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
     <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
@@ -194,6 +182,18 @@
     <title><![CDATA[快排]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java继承类]]></title>
+    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -239,18 +239,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[分糖果]]></title>
-    <url>%2F2018%2F06%2F09%2F%E5%88%86%E7%B3%96%E6%9E%9C%2F</url>
-    <content type="text"><![CDATA[题目描述 分糖果：科大讯飞第二道编程题 小明和小红是好朋友，但最近遇到一个棘手的问题，有一盒糖果要分成两份但是每颗糖果质量都不尽相同， 但为了分配的公平每份糖的糖果数量相差不得超过1，在此条件下两份糖果的质量差距尽可能小。 输入一行数，包含一个数n，代表糖果数量，后面一次是n个整数一次表示每个糖果的质量，每个糖果的质量都是1到450 之间的一个整数，每盒最多有20个糖果。 输出：每个样例输出两个数字分别为两堆糖果的质量，如不相同，先小后大。 样例：输入：5 9 6 5 8 7 输出：17 18 算法思想回溯，在数量差值为1的结果中找出最小的质量差 Python实现1234567891011121314151617def divide(candies, num, select, sum, total, index): global min global res if(abs(total-sum*2) &lt; min): res = sum min = abs(total-sum*2) result.append(select) for i in range(len(candies)): if(index == num-1): return3 select.append(candies[index]) sum += candies[index] temp = select.copy() if(len(select) &lt;= int(num/2)+1): index += 1 divide(candies, num, temp, sum, total, index) sum -= select[len(select) - 1] select.remove(select[len(select)-1])]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>面试题</tag>
-        <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[最长公共子串-最长公共子序列]]></title>
     <url>%2F2018%2F06%2F09%2F%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
     <content type="text"><![CDATA[最长公共子串 DP实现1234567891011121314151617181920212223242526272829public static int maxSubStr(String str1, String str2) &#123; int result = 0; int index = 0; int len1 = str1.length(); int len2 = str2.length(); int [][] dp = new int [len1][len2]; for(int i = 0; i &lt; len1; ++i) &#123; for(int j = 0; j &lt; len2; ++j) &#123; if(str1.charAt(i) == str2.charAt(j)) &#123; if(i &gt; 0 &amp;&amp; j &gt; 0) &#123; dp[i][j] = dp[i-1][j-1] + 1; // 状态转移 if(dp[i][j] &gt; result) &#123; result = dp[i][j]; index = i; // 记录最大子串的最后一个下标 &#125; // result = result &gt; dp[i][j] ? result : dp[i][j]; &#125;else &#123; dp[i][j] = 1; result = result &gt; dp[i][j] ? result : dp[i][j]; &#125; &#125; &#125; &#125; System.out.println(result); for(int i = index - result + 1; i &lt;= index; i++) &#123; System.out.print(str1.charAt(i) + " "); &#125; return result;&#125; 最长公共子序列####动态规划假设Z=&lt;z1,z2,⋯,zk&gt;是X与Y的LCS， 我们观察到如果Xm=Yn，则Zk=Xm=Yn，有Zk−1是Xm−1与Yn−1的LCS；如果Xm≠Yn，则Zk是Xm与Yn−1的LCS，或者是Xm−1与Yn的LCS。因此，求解LCS的问题则变成递归求解的两个子问题。但是，上述的递归求解的办法中，重复的子问题多，效率低下。改进的办法——用空间换时间，用数组保存中间状态，方便后面的计算。这就是动态规划（DP)的核心思想了。DP求解LCS用二维数组c[i][j]记录串x1x2⋯xi与y1y2⋯yj的LCS长度，则可得到状态转移方程: DP实现1234567891011121314151617181920public static int maxSubSequence(String str1, String str2) &#123; int len1 = str1.length(); int len2 = str2.length(); int [][] dp = new int[len1][len2]; for(int i = 0; i &lt; len1; ++i) &#123; for(int j = 0; j &lt; len2; ++j) &#123; if(i &gt; 0 &amp;&amp; j &gt; 0) &#123; if(str1.charAt(i) == str2.charAt(j)) &#123; dp[i][j] = dp[i-1][j-1] + 1; &#125;else &#123; dp[i][j] = dp[i-1][j] &gt; dp[i][j-1] ? dp[i-1][j] : dp[i][j-1]; &#125; &#125;else if(str1.charAt(i) == str2.charAt(j)) &#123; dp[i][j] = 1; &#125; &#125; &#125; System.out.println(dp[len1 - 1][len2 - 1]); return dp[len1-1][len2-1];&#125;]]></content>
@@ -258,38 +246,26 @@
         <category>面试</category>
       </categories>
       <tags>
-        <tag>面试题</tag>
         <tag>回溯</tag>
+        <tag>面试题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[分糖果]]></title>
+    <url>%2F2018%2F06%2F09%2F%E5%88%86%E7%B3%96%E6%9E%9C%2F</url>
+    <content type="text"><![CDATA[题目描述 分糖果：科大讯飞第二道编程题 小明和小红是好朋友，但最近遇到一个棘手的问题，有一盒糖果要分成两份但是每颗糖果质量都不尽相同， 但为了分配的公平每份糖的糖果数量相差不得超过1，在此条件下两份糖果的质量差距尽可能小。 输入一行数，包含一个数n，代表糖果数量，后面一次是n个整数一次表示每个糖果的质量，每个糖果的质量都是1到450 之间的一个整数，每盒最多有20个糖果。 输出：每个样例输出两个数字分别为两堆糖果的质量，如不相同，先小后大。 样例：输入：5 9 6 5 8 7 输出：17 18 算法思想回溯，在数量差值为1的结果中找出最小的质量差 Python实现1234567891011121314151617def divide(candies, num, select, sum, total, index): global min global res if(abs(total-sum*2) &lt; min): res = sum min = abs(total-sum*2) result.append(select) for i in range(len(candies)): if(index == num-1): return3 select.append(candies[index]) sum += candies[index] temp = select.copy() if(len(select) &lt;= int(num/2)+1): index += 1 divide(candies, num, temp, sum, total, index) sum -= select[len(select) - 1] select.remove(select[len(select)-1])]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>回溯</tag>
+        <tag>面试题</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[DP-最大上升子序列LIS]]></title>
     <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
     <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[括号生成]]></title>
-    <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
-    <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[DP-乘积最大子序列]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记录下最大值和最小值。状态转移方程：dp[i] = max(max,dp[i-1])max = max(maxnum[i],minnum[i],nums[i])min = min(maxnum[i],minnum[i],nums[i])其中，dp[i]表示前i个数中的最大乘积，maxm表示以第i-1个字符结尾的最大乘积,minm表示以第i-1个字符结尾的最小乘积,nums[i]即为第i个数。 DP实现123456789101112131415161718192021class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; dp[0] = nums[0]; int max = nums[0]; int min = nums[0]; for(int i = 1; i &lt; nums.length; i++)&#123; if(nums[i] &gt;= 0)&#123; max = Math.max(nums[i], max*nums[i]); min = Math.min(nums[i], min*nums[i]); &#125;else&#123; int temp = max; max = Math.max(nums[i], min*nums[i]); min = Math.min(nums[i], temp*nums[i]); &#125; dp[i] = Math.max(max, dp[i-1]); &#125; return dp[nums.length-1]; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -311,6 +287,30 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[DP-乘积最大子序列]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记录下最大值和最小值。状态转移方程：dp[i] = max(max,dp[i-1])max = max(maxnum[i],minnum[i],nums[i])min = min(maxnum[i],minnum[i],nums[i])其中，dp[i]表示前i个数中的最大乘积，maxm表示以第i-1个字符结尾的最大乘积,minm表示以第i-1个字符结尾的最小乘积,nums[i]即为第i个数。 DP实现123456789101112131415161718192021class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; dp[0] = nums[0]; int max = nums[0]; int min = nums[0]; for(int i = 1; i &lt; nums.length; i++)&#123; if(nums[i] &gt;= 0)&#123; max = Math.max(nums[i], max*nums[i]); min = Math.min(nums[i], min*nums[i]); &#125;else&#123; int temp = max; max = Math.max(nums[i], min*nums[i]); min = Math.min(nums[i], temp*nums[i]); &#125; dp[i] = Math.max(max, dp[i-1]); &#125; return dp[nums.length-1]; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[括号生成]]></title>
+    <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
+    <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[回溯-分割回文串]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%9B%9E%E6%BA%AF-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%2F</url>
     <content type="text"><![CDATA[题目描述给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案。示例:输入: “aab”输出:[ [“aa”,”b”], [“a”,”a”,”b”]] 算法思路回溯实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
@@ -320,6 +320,18 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP-最长回文子串]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &#123; public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = len-1; i &gt;= 0; i--)&#123; dp[i][i] = true; for(int j = i; j &lt; len; j++)&#123; if(s.charAt(i) == s.charAt(j) &amp;&amp; (j-i&lt;=1 || dp[i+1][j-1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(i, j+1).length())&#123; longStr = s.substring(i, j+1); &#125; &#125; &#125; &#125; return longStr; &#125;&#125; 正向DP12345678910111213141516public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = 1; i &lt;= len; i++)&#123; for(int j = i; j &gt;= 1; j--)&#123; if(s.charAt(i-1) == s.charAt(j-1) &amp;&amp; (i-j&lt;=1 || dp[i-1][j+1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(j-1, i).length())&#123; longStr = s.substring(j-1, i); &#125; &#125; &#125; &#125; return longStr; &#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -343,19 +355,7 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>动态规划</tag>
         <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[DP-最长回文子串]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &#123; public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = len-1; i &gt;= 0; i--)&#123; dp[i][i] = true; for(int j = i; j &lt; len; j++)&#123; if(s.charAt(i) == s.charAt(j) &amp;&amp; (j-i&lt;=1 || dp[i+1][j-1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(i, j+1).length())&#123; longStr = s.substring(i, j+1); &#125; &#125; &#125; &#125; return longStr; &#125;&#125; 正向DP12345678910111213141516public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = 1; i &lt;= len; i++)&#123; for(int j = i; j &gt;= 1; j--)&#123; if(s.charAt(i-1) == s.charAt(j-1) &amp;&amp; (i-j&lt;=1 || dp[i-1][j+1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(j-1, i).length())&#123; longStr = s.substring(j-1, i); &#125; &#125; &#125; &#125; return longStr; &#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
