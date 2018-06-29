@@ -103,9 +103,9 @@
         <category>PyTorch</category>
       </categories>
       <tags>
+        <tag>机器学习</tag>
         <tag>PyTorch</tag>
         <tag>深度学习</tag>
-        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -180,15 +180,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[快排]]></title>
-    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
+    <title><![CDATA[二叉树实现]]></title>
+    <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
       <categories>
-        <category>Java</category>
+        <category>数据结构</category>
       </categories>
       <tags>
         <tag>java</tag>
         <tag>数据结构</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -205,22 +206,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[二叉树实现]]></title>
-    <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
-    <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
+    <title><![CDATA[Java继承类]]></title>
+    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>Java</category>
       </categories>
       <tags>
         <tag>java</tag>
         <tag>数据结构</tag>
-        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java继承类]]></title>
-    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
+    <title><![CDATA[快排]]></title>
+    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -277,15 +277,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[括号生成]]></title>
-    <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
-    <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
+    <title><![CDATA[DP-最长递增子序列的个数]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>回溯</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -313,15 +313,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最长递增子序列的个数]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
+    <title><![CDATA[括号生成]]></title>
+    <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
+    <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>动态规划</tag>
+        <tag>回溯</tag>
       </tags>
   </entry>
   <entry>
