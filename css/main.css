@@ -1959,7 +1959,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #01ff3e;
+  background: #e7d57c;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3248,4 +3248,10 @@ ul.breadcrumb li+li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
+}
+body {
+  background: url("https://source.unsplash.com/random/1920x1080");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
 }
