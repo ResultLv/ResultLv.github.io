@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[链表算法题]]></title>
     <url>%2F2018%2F06%2F28%2F%E9%93%BE%E8%A1%A8%E7%AE%97%E6%B3%95%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[单链表123456// 单链表节点定义public class ListNode &#123; int val; ListNode next; ListNode(int x) &#123; val = x; &#125;&#125; 删除链表中的节点删除链表中等于给定值 val 的所有节点。 示例:输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6输出: 1-&gt;2-&gt;3-&gt;4-&gt;5 注意：该题中头节点也可存值1234567891011121314151617181920// 常规解法class Solution &#123; public ListNode removeElements(ListNode head, int val) &#123; while(head != null &amp;&amp; head.val == val)&#123; // 找到第一个值不为val的节点作为头结点 head = head.next; &#125; if(head == null) return null; ListNode q = head, p = head.next; while(p != null)&#123; if(p.val == val)&#123; q.next = p.next; p = q.next; &#125;else&#123; q = p; p = p.next; &#125; &#125; return head; &#125;&#125; 12345678// 大佬解法class Solution &#123; public ListNode removeElements(ListNode head, int val) &#123; if (head == null) return null; head.next = removeElements(head.next, val); return head.val == val ? head.next : head; &#125;&#125; 删除链表中的节点2请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。 示例 1:输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 说明: 链表至少包含两个节点。 链表中所有节点的值都是唯一的。 给定的节点为非末尾节点并且一定是链表中的一个有效节点。 不要从你的函数中返回任何结果。 可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点123456class Solution &#123; public void deleteNode(ListNode node) &#123; node.val = node.next.val; node.next = node.next.next; &#125;&#125; 删除链表中倒数第n个节点给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。 示例：给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.说明：给定的 n 保证是有效的。 一趟扫描实现用空间换时间,用一个List存储链表中遍历的所有节点，找到倒数第n个节点并删除123456789101112131415class Solution &#123; public ListNode removeNthFromEnd(ListNode head, int n) &#123; if(head == null || head.next == null) return null; List&lt;ListNode&gt; list = new ArrayList(); while(head != null)&#123; list.add(head); head = head.next; &#125; int len = list.size(); if(n == len) return list.get(1); // 删除第一个节点 if(n == 1) list.get(len-2).next = null; //删除最后一个节点 else list.get(len-n-1).next = list.get(len-n+1); // 删除中间节点 return list.get(0); &#125;&#125; 双指针法因为是删除倒数第n个节点，假设链表长度为len，那么就是正数第len-n+1个节点，删除要找到要删除节点的前一个，即第len-k个节点。设置两个指针i,j i先走n步，然后j再从头结点出发，从第n步开始i,j同时移动直到i到达尾结点,此时j移动步数为len-k,即找到了要删除的节点的前驱节点123456789101112131415161718class Solution &#123; public ListNode removeNthFromEnd(ListNode head, int n) &#123; ListNode i, j; i = j = head; for(int index = 0; index &lt; n; index++) i = i.next; if(i == null)&#123; head = head.next; return head; &#125; while(i.next != null)&#123; j = j.next; i = i.next; &#125; j.next = j.next.next; return head; &#125;&#125; 反转链表示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL 我的解法(需额外节点长度存储空间)12345678910111213141516class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null) return null; List&lt;ListNode&gt; list = new ArrayList(); while(head != null)&#123; list.add(head); head = head.next; &#125; int len = list.size(); for(int i = 1; i &lt; len; i++)&#123; list.get(len-i).next = list.get(len-i-1); &#125; list.get(0).next = null; return list.get(len-1); &#125;&#125; 常规迭代解法(头插法)12345678910111213class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null) return null; ListNode tail = null; while(head != null)&#123; ListNode nextNode = head.next; // 保留下个节点 head.next = tail; // 当前节点指向反转后链表 tail = head; // 反转链表头结点替换为当前节点 head = nextNode; // 转到下个节点 &#125; return tail; &#125;&#125; 头插法图解 递归解法123456789class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null||head.next == null) return head; // 递归出口，当前为最后一个节点 ListNode tail = reverseList(head.next); // 反转后的头结点 head.next.next = head; //反向连接(当前节点的下个节点指向当前节点) head.next = null; // 断开正向连接 return tail; &#125;&#125; 图解如下：]]></content>
+    <content type="text"><![CDATA[单链表123456// 单链表节点定义public class ListNode &#123; int val; ListNode next; ListNode(int x) &#123; val = x; &#125;&#125; 删除链表中的节点删除链表中等于给定值 val 的所有节点。 示例:输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6输出: 1-&gt;2-&gt;3-&gt;4-&gt;5 注意：该题中头节点也可存值1234567891011121314151617181920// 常规解法class Solution &#123; public ListNode removeElements(ListNode head, int val) &#123; while(head != null &amp;&amp; head.val == val)&#123; // 找到第一个值不为val的节点作为头结点 head = head.next; &#125; if(head == null) return null; ListNode q = head, p = head.next; while(p != null)&#123; if(p.val == val)&#123; q.next = p.next; p = q.next; &#125;else&#123; q = p; p = p.next; &#125; &#125; return head; &#125;&#125; 12345678// 大佬解法class Solution &#123; public ListNode removeElements(ListNode head, int val) &#123; if (head == null) return null; head.next = removeElements(head.next, val); // 删除后的连接操作 return head.val == val ? head.next : head; // 当前递归层head节点的下一个指向上一层递归返回节点 &#125;&#125; 删除链表中的节点2请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。 示例 1:输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 说明: 链表至少包含两个节点。 链表中所有节点的值都是唯一的。 给定的节点为非末尾节点并且一定是链表中的一个有效节点。 不要从你的函数中返回任何结果。 可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点123456class Solution &#123; public void deleteNode(ListNode node) &#123; node.val = node.next.val; node.next = node.next.next; &#125;&#125; 删除链表中倒数第n个节点给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。 示例：给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.说明：给定的 n 保证是有效的。 一趟扫描实现用空间换时间,用一个List存储链表中遍历的所有节点，找到倒数第n个节点并删除123456789101112131415class Solution &#123; public ListNode removeNthFromEnd(ListNode head, int n) &#123; if(head == null || head.next == null) return null; List&lt;ListNode&gt; list = new ArrayList(); while(head != null)&#123; list.add(head); head = head.next; &#125; int len = list.size(); if(n == len) return list.get(1); // 删除第一个节点 if(n == 1) list.get(len-2).next = null; //删除最后一个节点 else list.get(len-n-1).next = list.get(len-n+1); // 删除中间节点 return list.get(0); &#125;&#125; 双指针法因为是删除倒数第n个节点，假设链表长度为len，那么就是正数第len-n+1个节点，删除要找到要删除节点的前一个，即第len-k个节点。设置两个指针i,j i先走n步，然后j再从头结点出发，从第n步开始i,j同时移动直到i到达尾结点,此时j移动步数为len-k,即找到了要删除的节点的前驱节点123456789101112131415161718class Solution &#123; public ListNode removeNthFromEnd(ListNode head, int n) &#123; ListNode i, j; i = j = head; for(int index = 0; index &lt; n; index++) i = i.next; if(i == null)&#123; head = head.next; return head; &#125; while(i.next != null)&#123; j = j.next; i = i.next; &#125; j.next = j.next.next; return head; &#125;&#125; 反转链表示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL 我的解法(需额外节点长度存储空间)12345678910111213141516class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null) return null; List&lt;ListNode&gt; list = new ArrayList(); while(head != null)&#123; list.add(head); head = head.next; &#125; int len = list.size(); for(int i = 1; i &lt; len; i++)&#123; list.get(len-i).next = list.get(len-i-1); &#125; list.get(0).next = null; return list.get(len-1); &#125;&#125; 常规迭代解法(头插法)12345678910111213class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null) return null; ListNode tail = null; while(head != null)&#123; ListNode nextNode = head.next; // 保留下个节点 head.next = tail; // 当前节点指向反转后链表 tail = head; // 反转链表头结点替换为当前节点 head = nextNode; // 转到下个节点 &#125; return tail; &#125;&#125; 头插法图解 递归解法123456789class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null||head.next == null) return head; // 递归出口，当前为最后一个节点 ListNode tail = reverseList(head.next); // 反转后的头结点 head.next.next = head; //反向连接(当前节点的下个节点指向当前节点) head.next = null; // 断开正向连接 return tail; &#125;&#125; 图解如下：]]></content>
       <categories>
         <category>面试</category>
       </categories>
@@ -63,9 +63,9 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -180,19 +180,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[二叉树实现]]></title>
-    <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
-    <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>数据结构</tag>
-        <tag>二叉树</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[快排]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
@@ -227,6 +214,19 @@
       <tags>
         <tag>java</tag>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[二叉树实现]]></title>
+    <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>数据结构</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -301,18 +301,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最长递增子序列的个数]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[括号生成]]></title>
     <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
     <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
@@ -325,6 +313,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[DP-最长递增子序列的个数]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[回溯-分割回文串]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%9B%9E%E6%BA%AF-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%2F</url>
     <content type="text"><![CDATA[题目描述给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案。示例:输入: “aab”输出:[ [“aa”,”b”], [“a”,”a”,”b”]] 算法思路回溯实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
@@ -334,18 +334,6 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[DP-单词拆分 I]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20I%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入: s = “leetcode”, wordDict = [“leet”, “code”]输出: true解释: 返回 true 因为 “leetcode” 可以被拆分成 “leet code”。 示例 2：输入: s = “applepenapple”, wordDict = [“apple”, “pen”]输出: true解释: 返回 true 因为 “applepenapple” 可以被拆分成 “apple pen apple”。 注意你可以重复使用字典中的单词。 示例 3：输入: s = “catsandog”, wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出: false 算法思路动态规划的思路：将问题拆分成更小的子问题。用dp[i]表示0到i的子字符串是否可以拆分成满足条件的单词，在计算dp[i]的时候，我们已经知道dp[0],dp[1],…,dp[i-1],如果以i为结尾的j~i子串是满足条件的，并且0~j的子串也是在字典中的，那么dp[i]就是true。用公式表示就是： dp[j]&amp;&amp;s.substring[j,i+1]∈dict DP实现123456789101112131415class Solution &#123; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123;; boolean [] dp = new boolean[s.length()+1]； dp[0] = true; for(int i = 0; i &lt; s.length(); i++)&#123; for(int j = 0; j &lt;= i; j++)&#123; if(dp[j] &amp;&amp; wordDict.contains(s.substring(j, i+1)))&#123; dp[i+1] = true; break; &#125; &#125; &#125; return dp[s.length()]; &#125;&#125; DFS解法，超时1234567891011121314151617181920212223242526class Solution &#123; boolean dfs(String s, List&lt;String&gt; wordDict, int index)&#123; // 超时 String left = s.substring(index, s.length()); if(wordDict.contains(left))&#123; return true; &#125; List&lt;Integer&gt; list = new ArrayList(); for(int i = index; i &lt; s.length(); i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; list.add(i+1); &#125; &#125; for(Integer each:list) &#123; if(dfs(s, wordDict, each))&#123; return true; &#125; &#125; return false; &#125; boolean flag = false; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123; return dfs(s, wordDict, 0); &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -365,6 +353,18 @@
     <title><![CDATA[DP-最长回文子串]]></title>
     <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%2F</url>
     <content type="text"><![CDATA[题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &#123; public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = len-1; i &gt;= 0; i--)&#123; dp[i][i] = true; for(int j = i; j &lt; len; j++)&#123; if(s.charAt(i) == s.charAt(j) &amp;&amp; (j-i&lt;=1 || dp[i+1][j-1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(i, j+1).length())&#123; longStr = s.substring(i, j+1); &#125; &#125; &#125; &#125; return longStr; &#125;&#125; 正向DP12345678910111213141516public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = 1; i &lt;= len; i++)&#123; for(int j = i; j &gt;= 1; j--)&#123; if(s.charAt(i-1) == s.charAt(j-1) &amp;&amp; (i-j&lt;=1 || dp[i-1][j+1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(j-1, i).length())&#123; longStr = s.substring(j-1, i); &#125; &#125; &#125; &#125; return longStr; &#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP-单词拆分 I]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20I%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入: s = “leetcode”, wordDict = [“leet”, “code”]输出: true解释: 返回 true 因为 “leetcode” 可以被拆分成 “leet code”。 示例 2：输入: s = “applepenapple”, wordDict = [“apple”, “pen”]输出: true解释: 返回 true 因为 “applepenapple” 可以被拆分成 “apple pen apple”。 注意你可以重复使用字典中的单词。 示例 3：输入: s = “catsandog”, wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出: false 算法思路动态规划的思路：将问题拆分成更小的子问题。用dp[i]表示0到i的子字符串是否可以拆分成满足条件的单词，在计算dp[i]的时候，我们已经知道dp[0],dp[1],…,dp[i-1],如果以i为结尾的j~i子串是满足条件的，并且0~j的子串也是在字典中的，那么dp[i]就是true。用公式表示就是： dp[j]&amp;&amp;s.substring[j,i+1]∈dict DP实现123456789101112131415class Solution &#123; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123;; boolean [] dp = new boolean[s.length()+1]； dp[0] = true; for(int i = 0; i &lt; s.length(); i++)&#123; for(int j = 0; j &lt;= i; j++)&#123; if(dp[j] &amp;&amp; wordDict.contains(s.substring(j, i+1)))&#123; dp[i+1] = true; break; &#125; &#125; &#125; return dp[s.length()]; &#125;&#125; DFS解法，超时1234567891011121314151617181920212223242526class Solution &#123; boolean dfs(String s, List&lt;String&gt; wordDict, int index)&#123; // 超时 String left = s.substring(index, s.length()); if(wordDict.contains(left))&#123; return true; &#125; List&lt;Integer&gt; list = new ArrayList(); for(int i = index; i &lt; s.length(); i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; list.add(i+1); &#125; &#125; for(Integer each:list) &#123; if(dfs(s, wordDict, each))&#123; return true; &#125; &#125; return false; &#125; boolean flag = false; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123; return dfs(s, wordDict, 0); &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
