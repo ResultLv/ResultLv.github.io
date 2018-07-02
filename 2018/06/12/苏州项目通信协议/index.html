@@ -127,7 +127,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-1e193e0ce557d019.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-2eebf23ea9aa8ad0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-cc28dcdc5d048d6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-02T12:02:22.178Z">
+<meta property="og:updated_time" content="2018-07-02T12:37:09.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="苏州项目USB通信协议">
 <meta name="twitter:description" content="版本号：0.01发行日期：2018-JUN-12 HID设备符兼容：    微软Windows 98、Windows2000、NT、XP、VISTA、WIN7、WIN8、WIN10，免驱动安装；    Linux操作系统，免驱动安装。    苹果Mac操作系统，免驱动安装 VID: 未定PID: 未定 液晶屏信息 写入参数与命令均为16进制值。">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-02 20:02:22" itemprop="dateModified" datetime="2018-07-02T20:02:22+08:00">2018-07-02</time>
+                <time title="修改时间：2018-07-02 20:37:09" itemprop="dateModified" datetime="2018-07-02T20:37:09+08:00">2018-07-02</time>
               
             
           </span>
@@ -612,20 +612,22 @@ Rslt：执行结果
 </code></pre><h3 id="更新AP名称列表：0B"><a href="#更新AP名称列表：0B" class="headerlink" title="更新AP名称列表：0B"></a>更新AP名称列表：0B</h3><pre><code>写入：0B
 返回：Rslt:0
 </code></pre><h3 id="清除模具检修次数命令：0C"><a href="#清除模具检修次数命令：0C" class="headerlink" title="清除模具检修次数命令：0C"></a>清除模具检修次数命令：0C</h3><pre><code>写入：0C
-</code></pre><p>  返回：Rslt:0</p>
-<h3 id="读取当前要写入的文件编号：0D"><a href="#读取当前要写入的文件编号：0D" class="headerlink" title="读取当前要写入的文件编号：0D"></a>读取当前要写入的文件编号：0D</h3><p>  写入：0D</p>
-<h2 id="返回：FilNumb-0000001-ReplenNumb-0000000"><a href="#返回：FilNumb-0000001-ReplenNumb-0000000" class="headerlink" title="  返回：FilNumb:0000001;ReplenNumb:0000000."></a>  返回：FilNumb:0000001;ReplenNumb:0000000.</h2><pre><code>    说明：
+返回：Rslt:0
+</code></pre><h3 id="读取当前要写入的文件编号：0D"><a href="#读取当前要写入的文件编号：0D" class="headerlink" title="读取当前要写入的文件编号：0D"></a>读取当前要写入的文件编号：0D</h3><pre><code>写入：0D
+返回：FilNumb:0000001;ReplenNumb:0000000.
+说明：
 FilNo.:      ==&gt; 当前已写入的文件编号;
 ReplenNo.:   ==&gt; 插上USB后将上载的文件编号.
-</code></pre><h3 id="读取当前系统的状态命令：0E"><a href="#读取当前系统的状态命令：0E" class="headerlink" title="读取当前系统的状态命令：0E"></a>读取当前系统的状态命令：0E</h3><p>###<br>  写入：0E<br>  返回：AP:0;Svr:0;Batt:355.</p>
-<pre><code>    说明：
+</code></pre><h3 id="读取当前系统的状态命令：0E"><a href="#读取当前系统的状态命令：0E" class="headerlink" title="读取当前系统的状态命令：0E"></a>读取当前系统的状态命令：0E</h3><pre><code>写入：0E
+返回：AP:0;Svr:0;Batt:355.
+说明：
 AP:       ==&gt; WIFI模组连接主站状态;
-  =2: 故障 
-  =1: 已连接
-  =0: 未连接
+    =2: 故障 
+    =1: 已连接
+    =0: 未连接
 Svr:      ==&gt; 服务器连接状态;
-  =1: 曾经连接成功
-  =0: 从未连接成功
+    =1: 曾经连接成功
+    =0: 从未连接成功
 Batt:     ==&gt; 锂电池电压,&quot;355&quot;表示3.55V.
 </code></pre>
       
@@ -900,7 +902,7 @@ Batt:     ==&gt; 锂电池电压,&quot;355&quot;表示3.55V.
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#液晶屏信息"><span class="nav-number">1.</span> <span class="nav-text">液晶屏信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统信息命令：01"><span class="nav-number">2.</span> <span class="nav-text">系统信息命令：01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期时间命令：02"><span class="nav-number">3.</span> <span class="nav-text">日期时间命令：02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期时间校正命令：03"><span class="nav-number">4.</span> <span class="nav-text">日期时间校正命令：03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户名与密码主命令：04"><span class="nav-number">5.</span> <span class="nav-text">用户名与密码主命令：04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取模具检修次数命令：05"><span class="nav-number">6.</span> <span class="nav-text">读取模具检修次数命令：05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设定服务器IP地址和端口命令：06"><span class="nav-number">7.</span> <span class="nav-text">设定服务器IP地址和端口命令：06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取服务器IP地址和端口命令：07"><span class="nav-number">8.</span> <span class="nav-text">读取服务器IP地址和端口命令：07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取所有WIFI-AP名称命令：08"><span class="nav-number">9.</span> <span class="nav-text">读取所有WIFI-AP名称命令：08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置需要连接的WIFI-AP、密码命令：09"><span class="nav-number">10.</span> <span class="nav-text">设置需要连接的WIFI-AP、密码命令：09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取已设定的AP名称与密码：0A"><span class="nav-number">11.</span> <span class="nav-text">读取已设定的AP名称与密码：0A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新AP名称列表：0B"><span class="nav-number">12.</span> <span class="nav-text">更新AP名称列表：0B</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清除模具检修次数命令：0C"><span class="nav-number">13.</span> <span class="nav-text">清除模具检修次数命令：0C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取当前要写入的文件编号：0D"><span class="nav-number">14.</span> <span class="nav-text">读取当前要写入的文件编号：0D</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回：FilNumb-0000001-ReplenNumb-0000000"><span class="nav-number"></span> <span class="nav-text">  返回：FilNumb:0000001;ReplenNumb:0000000.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取当前系统的状态命令：0E"><span class="nav-number">1.</span> <span class="nav-text">读取当前系统的状态命令：0E</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#液晶屏信息"><span class="nav-number">1.</span> <span class="nav-text">液晶屏信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统信息命令：01"><span class="nav-number">2.</span> <span class="nav-text">系统信息命令：01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期时间命令：02"><span class="nav-number">3.</span> <span class="nav-text">日期时间命令：02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期时间校正命令：03"><span class="nav-number">4.</span> <span class="nav-text">日期时间校正命令：03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户名与密码主命令：04"><span class="nav-number">5.</span> <span class="nav-text">用户名与密码主命令：04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取模具检修次数命令：05"><span class="nav-number">6.</span> <span class="nav-text">读取模具检修次数命令：05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设定服务器IP地址和端口命令：06"><span class="nav-number">7.</span> <span class="nav-text">设定服务器IP地址和端口命令：06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取服务器IP地址和端口命令：07"><span class="nav-number">8.</span> <span class="nav-text">读取服务器IP地址和端口命令：07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取所有WIFI-AP名称命令：08"><span class="nav-number">9.</span> <span class="nav-text">读取所有WIFI-AP名称命令：08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置需要连接的WIFI-AP、密码命令：09"><span class="nav-number">10.</span> <span class="nav-text">设置需要连接的WIFI-AP、密码命令：09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取已设定的AP名称与密码：0A"><span class="nav-number">11.</span> <span class="nav-text">读取已设定的AP名称与密码：0A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新AP名称列表：0B"><span class="nav-number">12.</span> <span class="nav-text">更新AP名称列表：0B</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清除模具检修次数命令：0C"><span class="nav-number">13.</span> <span class="nav-text">清除模具检修次数命令：0C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取当前要写入的文件编号：0D"><span class="nav-number">14.</span> <span class="nav-text">读取当前要写入的文件编号：0D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取当前系统的状态命令：0E"><span class="nav-number">15.</span> <span class="nav-text">读取当前系统的状态命令：0E</span></a></li></ol></div>
             
 
           </div>
