@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Atarashii]]></title>
+    <url>%2F2018%2F07%2F03%2FAtarashii%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[链表算法题]]></title>
     <url>%2F2018%2F06%2F28%2F%E9%93%BE%E8%A1%A8%E7%AE%97%E6%B3%95%E9%A2%98%2F</url>
     <content type="text"><![CDATA[单链表123456// 单链表节点定义public class ListNode &#123; int val; ListNode next; ListNode(int x) &#123; val = x; &#125;&#125; 删除链表中的节点删除链表中等于给定值 val 的所有节点。 示例:输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6输出: 1-&gt;2-&gt;3-&gt;4-&gt;5 注意：该题中头节点也可存值1234567891011121314151617181920// 常规解法class Solution &#123; public ListNode removeElements(ListNode head, int val) &#123; while(head != null &amp;&amp; head.val == val)&#123; // 找到第一个值不为val的节点作为头结点 head = head.next; &#125; if(head == null) return null; ListNode q = head, p = head.next; while(p != null)&#123; if(p.val == val)&#123; q.next = p.next; p = q.next; &#125;else&#123; q = p; p = p.next; &#125; &#125; return head; &#125;&#125; 12345678// 大佬解法class Solution &#123; public ListNode removeElements(ListNode head, int val) &#123; if (head == null) return null; head.next = removeElements(head.next, val); // 删除后的连接操作 return head.val == val ? head.next : head; // 当前递归层head节点的下一个指向上一层递归返回节点 &#125;&#125; 删除链表中的节点2请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。 示例 1:输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 说明: 链表至少包含两个节点。 链表中所有节点的值都是唯一的。 给定的节点为非末尾节点并且一定是链表中的一个有效节点。 不要从你的函数中返回任何结果。 可以把要删除的节点，用该节点的后面节点进行覆盖，然后删掉后面那个节点123456class Solution &#123; public void deleteNode(ListNode node) &#123; node.val = node.next.val; node.next = node.next.next; &#125;&#125; 删除链表中倒数第n个节点给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。 示例：给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.说明：给定的 n 保证是有效的。 一趟扫描实现用空间换时间,用一个List存储链表中遍历的所有节点，找到倒数第n个节点并删除123456789101112131415class Solution &#123; public ListNode removeNthFromEnd(ListNode head, int n) &#123; if(head == null || head.next == null) return null; List&lt;ListNode&gt; list = new ArrayList(); while(head != null)&#123; list.add(head); head = head.next; &#125; int len = list.size(); if(n == len) return list.get(1); // 删除第一个节点 if(n == 1) list.get(len-2).next = null; //删除最后一个节点 else list.get(len-n-1).next = list.get(len-n+1); // 删除中间节点 return list.get(0); &#125;&#125; 双指针法因为是删除倒数第n个节点，假设链表长度为len，那么就是正数第len-n+1个节点，删除要找到要删除节点的前一个，即第len-n个节点。设置两个指针i,j i先走n步，然后j再从头结点出发，从第n步开始i,j同时移动直到i到达尾结点,此时j移动步数为len-n,即找到了要删除的节点的前驱节点123456789101112131415161718class Solution &#123; public ListNode removeNthFromEnd(ListNode head, int n) &#123; ListNode i, j; i = j = head; for(int index = 0; index &lt; n; index++) i = i.next; if(i == null)&#123; head = head.next; return head; &#125; while(i.next != null)&#123; j = j.next; i = i.next; &#125; j.next = j.next.next; return head; &#125;&#125; 反转链表示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL 我的解法(需额外节点长度存储空间)12345678910111213141516class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null) return null; List&lt;ListNode&gt; list = new ArrayList(); while(head != null)&#123; list.add(head); head = head.next; &#125; int len = list.size(); for(int i = 1; i &lt; len; i++)&#123; list.get(len-i).next = list.get(len-i-1); &#125; list.get(0).next = null; return list.get(len-1); &#125;&#125; 常规迭代解法(头插法)12345678910111213class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null) return null; ListNode tail = null; while(head != null)&#123; ListNode nextNode = head.next; // 保留下个节点 head.next = tail; // 当前节点指向反转后链表 tail = head; // 反转链表头结点替换为当前节点 head = nextNode; // 转到下个节点 &#125; return tail; &#125;&#125; 头插法图解 递归解法123456789class Solution &#123; public ListNode reverseList(ListNode head) &#123; if(head == null||head.next == null) return head; // 递归出口，当前为最后一个节点 ListNode tail = reverseList(head.next); // 反转后的头结点 head.next.next = head; //反向连接(当前节点的下个节点指向当前节点) head.next = null; // 断开正向连接 return tail; &#125;&#125; 图解如下：]]></content>
@@ -23,8 +28,8 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>动态规划</tag>
-        <tag>面试题</tag>
         <tag>递归</tag>
+        <tag>面试题</tag>
         <tag>字符串</tag>
       </tags>
   </entry>
@@ -75,8 +80,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>动态规划</tag>
         <tag>回溯</tag>
+        <tag>动态规划</tag>
         <tag>DFS</tag>
         <tag>递归</tag>
       </tags>
@@ -175,6 +180,28 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[快排]]></title>
+    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[链表实现]]></title>
+    <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java继承类]]></title>
     <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
     <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
@@ -194,28 +221,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[链表实现]]></title>
-    <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
-    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[快排]]></title>
-    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[阿里笔试-着色问题]]></title>
     <url>%2F2018%2F06%2F09%2F%E9%98%BF%E9%87%8C%E7%BC%96%E7%A8%8B%E9%A2%98%2F</url>
     <content type="text"><![CDATA[题目描述将一个圆分为N个扇形，使用M个颜色对这些扇形进行填充，相邻扇形的颜色不能相同，问：有多少种填充方式例如：若N=3，M=3，则有6种方式。样例输入：5 5样例输出：1020 算法思路思路：用递归比较好解决。设最终状态为f(n, m), 一共有两种情况到达最终状态：填最后一个扇形时，它的相邻两个扇形颜色一样和不一样。不一样时，可用颜色为m-2，从状态f(n, m-1)到达；一样时，可用颜色m-1,从状态f(n, m-2)到达.递推数列：f(n,m) = (m-2)f(n, m-1) + (m-1)f(n, m-2)初值：f(n, 1) = n; f(n, 2) = n(n-1); f(n, 3) = n(n-1)*(n-2) 递归实现12345678910111213141516171819202122public class Demo01 &#123; public static int f(int n, int m) &#123; if(n == 1) &#123; return m; &#125; if(n == 2) &#123; return m*(m-1); &#125; if(n == 3) &#123; return m*(m-1)*(m-2); &#125; return (m-2)*f(n-1, m) + (m-1)*f(n-2, m); //f(n, m) = (m-2)*f(n-1, m) + (m-2)*f(n-2, m) &#125; //n-1个扇形时，相邻的两个扇形颜色必定不同，因此是m-2 public static void main(String [] args) &#123; //n-2个扇形时，相邻的两个扇形颜色可以不同，因此是m-1 Scanner sc = new Scanner(System.in); int n = sc.nextInt(); // 扇形个数 int m = sc.nextInt(); // 颜色数目 sc.close(); int num = f(n, m); System.out.println(num); &#125;&#125;]]></content>
@@ -223,8 +228,8 @@
         <category>面试</category>
       </categories>
       <tags>
-        <tag>面试题</tag>
         <tag>递归</tag>
+        <tag>面试题</tag>
       </tags>
   </entry>
   <entry>
@@ -236,18 +241,6 @@
       </categories>
       <tags>
         <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[分糖果]]></title>
-    <url>%2F2018%2F06%2F09%2F%E5%88%86%E7%B3%96%E6%9E%9C%2F</url>
-    <content type="text"><![CDATA[题目描述 分糖果：科大讯飞第二道编程题 小明和小红是好朋友，但最近遇到一个棘手的问题，有一盒糖果要分成两份但是每颗糖果质量都不尽相同， 但为了分配的公平每份糖的糖果数量相差不得超过1，在此条件下两份糖果的质量差距尽可能小。 输入一行数，包含一个数n，代表糖果数量，后面一次是n个整数一次表示每个糖果的质量，每个糖果的质量都是1到450 之间的一个整数，每盒最多有20个糖果。 输出：每个样例输出两个数字分别为两堆糖果的质量，如不相同，先小后大。 样例：输入：5 9 6 5 8 7 输出：17 18 算法思想回溯，在数量差值为1的结果中找出最小的质量差 Python实现1234567891011121314151617def divide(candies, num, select, sum, total, index): global min global res if(abs(total-sum*2) &lt; min): res = sum min = abs(total-sum*2) result.append(select) for i in range(len(candies)): if(index == num-1): return3 select.append(candies[index]) sum += candies[index] temp = select.copy() if(len(select) &lt;= int(num/2)+1): index += 1 divide(candies, num, temp, sum, total, index) sum -= select[len(select) - 1] select.remove(select[len(select)-1])]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>回溯</tag>
-        <tag>面试题</tag>
       </tags>
   </entry>
   <entry>
@@ -263,9 +256,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最大上升子序列LIS]]></title>
-    <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
+    <title><![CDATA[分糖果]]></title>
+    <url>%2F2018%2F06%2F09%2F%E5%88%86%E7%B3%96%E6%9E%9C%2F</url>
+    <content type="text"><![CDATA[题目描述 分糖果：科大讯飞第二道编程题 小明和小红是好朋友，但最近遇到一个棘手的问题，有一盒糖果要分成两份但是每颗糖果质量都不尽相同， 但为了分配的公平每份糖的糖果数量相差不得超过1，在此条件下两份糖果的质量差距尽可能小。 输入一行数，包含一个数n，代表糖果数量，后面一次是n个整数一次表示每个糖果的质量，每个糖果的质量都是1到450 之间的一个整数，每盒最多有20个糖果。 输出：每个样例输出两个数字分别为两堆糖果的质量，如不相同，先小后大。 样例：输入：5 9 6 5 8 7 输出：17 18 算法思想回溯，在数量差值为1的结果中找出最小的质量差 Python实现1234567891011121314151617def divide(candies, num, select, sum, total, index): global min global res if(abs(total-sum*2) &lt; min): res = sum min = abs(total-sum*2) result.append(select) for i in range(len(candies)): if(index == num-1): return3 select.append(candies[index]) sum += candies[index] temp = select.copy() if(len(select) &lt;= int(num/2)+1): index += 1 divide(candies, num, temp, sum, total, index) sum -= select[len(select) - 1] select.remove(select[len(select)-1])]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>回溯</tag>
+        <tag>面试题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP-最长递增子序列的个数]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -287,9 +292,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最长递增子序列的个数]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
+    <title><![CDATA[DP-最大上升子序列LIS]]></title>
+    <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -323,19 +328,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP+回溯-单词拆分 II]]></title>
-    <url>%2F2018%2F06%2F09%2FDP%2B%E5%9B%9E%E6%BA%AF-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20II%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入:s = “catsanddog”wordDict = [“cat”, “cats”, “and”, “sand”, “dog”]输出:[ “cats and dog”, “cat sand dog”] 示例 2：输入:s = “pineapplepenapple”wordDict = [“apple”, “pen”, “applepen”, “pine”, “pineapple”]输出:[ “pine apple pen apple”, “pineapple pen apple”, “pine applepen apple”]解释: 注意你可以重复使用字典中的单词。 示例 3：输入:s = “catsandog”wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出:[] 算法思路这道题类似 Word Break I 判断是否能把字符串拆分为字典里的单词 @LeetCode 只不过要求计算的并不仅仅是是否能拆分，而是要求出所有的拆分方案。因此用递归。但是直接递归做会超时，原因是LeetCode里有几个很长但是无法拆分的情况，所以就先跑一遍Word Break I，先判断能否拆分，然后再进行拆分。 DP实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123; boolean isBreak(String s, List&lt;String&gt; wordDict) &#123; boolean[] canBreak = new boolean[s.length()+1]; canBreak[0] = true; for(int i=1; i&lt;=s.length(); i++) &#123; boolean flag = false; for(int j=0; j&lt;i; j++) &#123; if(canBreak[j] &amp;&amp; wordDict.contains(s.substring(j,i))) &#123; flag = true; break; &#125; &#125; canBreak[i] = flag; &#125; return canBreak[s.length()]; &#125; void dfs(String s, List&lt;String&gt; wordDict, String str, int index)&#123; String result = str; //记录字符串状态 int len = s.length(); String tmp = s.substring(index, len); if(wordDict.contains(tmp))&#123; //最后一段存在于字典中，则保存结果 str += tmp; res.add(str); &#125; List&lt;Integer&gt; listIndex = new ArrayList(); List&lt;String&gt; listStr = new ArrayList(); for(int i = index; i &lt; len; i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; listIndex.add(i+1); listStr.add(temp); &#125; &#125; String temp = result; //保存递归前的字符串状态，以便回溯 for(int i = 0; i &lt; listIndex.size(); i++)&#123; result += listStr.get(i) + " "; dfs(s, wordDict, result, listIndex.get(i)); result = temp; &#125; &#125; List&lt;String&gt; res = new ArrayList(); public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(!isBreak(s, wordDict)) return res; String str = ""; dfs(s, wordDict, str, 0); return res; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>动态规划</tag>
-        <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[DP-单词拆分 I]]></title>
     <url>%2F2018%2F06%2F09%2FDP-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20I%2F</url>
     <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入: s = “leetcode”, wordDict = [“leet”, “code”]输出: true解释: 返回 true 因为 “leetcode” 可以被拆分成 “leet code”。 示例 2：输入: s = “applepenapple”, wordDict = [“apple”, “pen”]输出: true解释: 返回 true 因为 “applepenapple” 可以被拆分成 “apple pen apple”。 注意你可以重复使用字典中的单词。 示例 3：输入: s = “catsandog”, wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出: false 算法思路动态规划的思路：将问题拆分成更小的子问题。用dp[i]表示0到i的子字符串是否可以拆分成满足条件的单词，在计算dp[i]的时候，我们已经知道dp[0],dp[1],…,dp[i-1],如果以i为结尾的j~i子串是满足条件的，并且0~j的子串也是在字典中的，那么dp[i]就是true。用公式表示就是： dp[j]&amp;&amp;s.substring[j,i+1]∈dict DP实现123456789101112131415class Solution &#123; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123;; boolean [] dp = new boolean[s.length()+1]； dp[0] = true; for(int i = 0; i &lt; s.length(); i++)&#123; for(int j = 0; j &lt;= i; j++)&#123; if(dp[j] &amp;&amp; wordDict.contains(s.substring(j, i+1)))&#123; dp[i+1] = true; break; &#125; &#125; &#125; return dp[s.length()]; &#125;&#125; DFS解法，超时1234567891011121314151617181920212223242526class Solution &#123; boolean dfs(String s, List&lt;String&gt; wordDict, int index)&#123; // 超时 String left = s.substring(index, s.length()); if(wordDict.contains(left))&#123; return true; &#125; List&lt;Integer&gt; list = new ArrayList(); for(int i = index; i &lt; s.length(); i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; list.add(i+1); &#125; &#125; for(Integer each:list) &#123; if(dfs(s, wordDict, each))&#123; return true; &#125; &#125; return false; &#125; boolean flag = false; public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123; return dfs(s, wordDict, 0); &#125;&#125;]]></content>
@@ -356,6 +348,19 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP+回溯-单词拆分 II]]></title>
+    <url>%2F2018%2F06%2F09%2FDP%2B%E5%9B%9E%E6%BA%AF-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20II%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入:s = “catsanddog”wordDict = [“cat”, “cats”, “and”, “sand”, “dog”]输出:[ “cats and dog”, “cat sand dog”] 示例 2：输入:s = “pineapplepenapple”wordDict = [“apple”, “pen”, “applepen”, “pine”, “pineapple”]输出:[ “pine apple pen apple”, “pineapple pen apple”, “pine applepen apple”]解释: 注意你可以重复使用字典中的单词。 示例 3：输入:s = “catsandog”wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出:[] 算法思路这道题类似 Word Break I 判断是否能把字符串拆分为字典里的单词 @LeetCode 只不过要求计算的并不仅仅是是否能拆分，而是要求出所有的拆分方案。因此用递归。但是直接递归做会超时，原因是LeetCode里有几个很长但是无法拆分的情况，所以就先跑一遍Word Break I，先判断能否拆分，然后再进行拆分。 DP实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123; boolean isBreak(String s, List&lt;String&gt; wordDict) &#123; boolean[] canBreak = new boolean[s.length()+1]; canBreak[0] = true; for(int i=1; i&lt;=s.length(); i++) &#123; boolean flag = false; for(int j=0; j&lt;i; j++) &#123; if(canBreak[j] &amp;&amp; wordDict.contains(s.substring(j,i))) &#123; flag = true; break; &#125; &#125; canBreak[i] = flag; &#125; return canBreak[s.length()]; &#125; void dfs(String s, List&lt;String&gt; wordDict, String str, int index)&#123; String result = str; //记录字符串状态 int len = s.length(); String tmp = s.substring(index, len); if(wordDict.contains(tmp))&#123; //最后一段存在于字典中，则保存结果 str += tmp; res.add(str); &#125; List&lt;Integer&gt; listIndex = new ArrayList(); List&lt;String&gt; listStr = new ArrayList(); for(int i = index; i &lt; len; i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; listIndex.add(i+1); listStr.add(temp); &#125; &#125; String temp = result; //保存递归前的字符串状态，以便回溯 for(int i = 0; i &lt; listIndex.size(); i++)&#123; result += listStr.get(i) + " "; dfs(s, wordDict, result, listIndex.get(i)); result = temp; &#125; &#125; List&lt;String&gt; res = new ArrayList(); public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(!isBreak(s, wordDict)) return res; String str = ""; dfs(s, wordDict, str, 0); return res; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>回溯</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
