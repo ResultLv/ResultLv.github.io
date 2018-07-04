@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Atarashii]]></title>
+    <title><![CDATA[面试题23：链表中环的入口节点]]></title>
     <url>%2F2018%2F07%2F04%2F%E9%9D%A2%E8%AF%95%E9%A2%9823%EF%BC%9A%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3%E8%8A%82%E7%82%B9%2F</url>
     <content type="text"><![CDATA[题目描述给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。 说明：不允许修改给定的链表。进阶：你是否可以不用额外空间解决此题？ 思路首先是判断链表中是否有环，然后再找到环的入口 判断是否有环。可以用一快一满两个指针，快指针每次走两步，慢指针每次走一步。如果快指针追上了慢指针，则链表中有环 找到环的入口。假定环的长度为n，链表长度为len，让p1,p2两个指针开始都指向头节点，p1先走n步，此时p1距尾结点还剩len-n-1步。p1走len-n步后即到达环入口，p2同时走len-n步后也会达到入口。所以当p1,p2相遇时的节点就是环的入口 确定环的长度。第一步中判断有环，快慢两个指针相遇时，相遇节点必定在环中。此时慢指针继续向前移动，并累计节点个数，当回到相遇节点时，计数即为环的长度。双指针法判断是否有环并确定环的长度1234567891011121314151617public int cycleLen(ListNode head)&#123; if(head == null) return 0; ListNode p1 = head, p2 = head; while(p2 != null &amp;&amp; p2.next != null)&#123; p1 = p1.next; p2 = p2.next.next; if(p1 == p2)&#123; int count = 1; while(p1 != p2.next)&#123; count++; p2 = p2.next; &#125; return count; &#125; &#125; return 0;&#125; 找到环的入口1234567891011public ListNode detectCycle(ListNode head) &#123; int n = cycleLen(head); if(n == 0) return null; ListNode p1 = head, p2 = head; for(int i = 0; i &lt; n; i++) p1 = p1.next; while(p1 != p2)&#123; p1 = p1.next; p2 = p2.next; &#125; return p1;&#125;]]></content>
       <categories>
@@ -36,8 +36,8 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>动态规划</tag>
-        <tag>递归</tag>
         <tag>面试题</tag>
+        <tag>递归</tag>
         <tag>字符串</tag>
       </tags>
   </entry>
@@ -74,9 +74,9 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>递归</tag>
-        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -188,6 +188,25 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[快排]]></title>
+    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java继承类]]></title>
+    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[二叉树实现]]></title>
     <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
     <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
@@ -210,25 +229,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[快排]]></title>
-    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java继承类]]></title>
-    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[阿里笔试-着色问题]]></title>
     <url>%2F2018%2F06%2F09%2F%E9%98%BF%E9%87%8C%E7%BC%96%E7%A8%8B%E9%A2%98%2F</url>
     <content type="text"><![CDATA[题目描述将一个圆分为N个扇形，使用M个颜色对这些扇形进行填充，相邻扇形的颜色不能相同，问：有多少种填充方式例如：若N=3，M=3，则有6种方式。样例输入：5 5样例输出：1020 算法思路思路：用递归比较好解决。设最终状态为f(n, m), 一共有两种情况到达最终状态：填最后一个扇形时，它的相邻两个扇形颜色一样和不一样。不一样时，可用颜色为m-2，从状态f(n, m-1)到达；一样时，可用颜色m-1,从状态f(n, m-2)到达.递推数列：f(n,m) = (m-2)f(n, m-1) + (m-1)f(n, m-2)初值：f(n, 1) = n; f(n, 2) = n(n-1); f(n, 3) = n(n-1)*(n-2) 递归实现12345678910111213141516171819202122public class Demo01 &#123; public static int f(int n, int m) &#123; if(n == 1) &#123; return m; &#125; if(n == 2) &#123; return m*(m-1); &#125; if(n == 3) &#123; return m*(m-1)*(m-2); &#125; return (m-2)*f(n-1, m) + (m-1)*f(n-2, m); //f(n, m) = (m-2)*f(n-1, m) + (m-2)*f(n-2, m) &#125; //n-1个扇形时，相邻的两个扇形颜色必定不同，因此是m-2 public static void main(String [] args) &#123; //n-2个扇形时，相邻的两个扇形颜色可以不同，因此是m-1 Scanner sc = new Scanner(System.in); int n = sc.nextInt(); // 扇形个数 int m = sc.nextInt(); // 颜色数目 sc.close(); int num = f(n, m); System.out.println(num); &#125;&#125;]]></content>
@@ -236,8 +236,8 @@
         <category>面试</category>
       </categories>
       <tags>
-        <tag>递归</tag>
         <tag>面试题</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
