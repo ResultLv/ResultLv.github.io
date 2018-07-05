@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-70f8b273d385a490.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-c28b2be6972654f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-6815070d5014fb48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-05T14:19:50.680Z">
+<meta property="og:updated_time" content="2018-07-05T14:23:31.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WPF MVVV模式实现">
 <meta name="twitter:description" content="两篇好文MVVM模式解析和在WPF中的实现MVVM中轻松实现Command绑定">
@@ -397,7 +397,7 @@
                 
               
 
-              <time title="创建时间：2018-07-05 18:59:33 / 修改时间：22:19:50" itemprop="dateCreated datePublished" datetime="2018-07-05T18:59:33+08:00">2018-07-05</time>
+              <time title="创建时间：2018-07-05 18:59:33 / 修改时间：22:23:31" itemprop="dateCreated datePublished" datetime="2018-07-05T18:59:33+08:00">2018-07-05</time>
             
 
             
@@ -514,7 +514,7 @@
 <p>例如要处理Button的MouseMove事件，但又避免用后置代码，尽量在ViewModel中处理事件。此时可以通过事件触发器来引发MouseMove事件。除了前文命令绑定提到的Prism.dll，还需要引用System.Windows.Interactivity.dll，该dll在安装Blend后添加引用即可。</p>
 <ul>
 <li><p>xaml代码</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加引用</span></span><br><span class="line">xmlns:i=<span class="string">"clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"</span></span><br><span class="line"></span><br><span class="line">&lt;Button&gt;</span><br><span class="line">	&lt;i:Interaction.Triggers&gt;</span><br><span class="line">		&lt;i:EventTrigger EventName=<span class="string">"MouseMove"</span>&gt;</span><br><span class="line">			&lt;i:InvokeCommandAction Command=<span class="string">"&#123;Binding btn_connect&#125;"</span> /&gt;</span><br><span class="line">		&lt;/i:EventTrigger&gt;</span><br><span class="line">	&lt;/i:Interaction.Triggers&gt;</span><br><span class="line">&lt;/Button&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加引用</span></span><br><span class="line">xmlns:i=<span class="string">"clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"</span></span><br><span class="line"></span><br><span class="line">&lt;Button&gt;</span><br><span class="line">	&lt;i:Interaction.Triggers&gt;</span><br><span class="line">		&lt;i:EventTrigger EventName=<span class="string">"MouseMove"</span>&gt;</span><br><span class="line">			&lt;i:InvokeCommandAction Command=<span class="string">"&#123;Binding MouseMove&#125;"</span> /&gt;</span><br><span class="line">		&lt;/i:EventTrigger&gt;</span><br><span class="line">	&lt;/i:Interaction.Triggers&gt;</span><br><span class="line">&lt;/Button&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>ViewModel代码</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ICommand MouseMove</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">get</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> DelegateCommand(() =&gt;</span><br><span class="line">		&#123;</span><br><span class="line">			MessageBox.Show(<span class="string">"鼠标移出按钮了!"</span>)</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
