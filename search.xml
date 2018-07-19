@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[二叉树算法题]]></title>
     <url>%2F2018%2F07%2F19%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[另一个树的子树(面试题26：树的子结构)题目描述给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。示例 1:给定的树 s: 3 / \ 4 5 / \ 1 2给定的树 t： 4 / \ 1 2返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2:给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2返回 false。 算法思想遍历二叉树s，依次以每个节点为根节点，与二叉树t进行比较，看是否相同，若s中存在以某个节点为跟节点的子树与t完全相同，则返回true,否则返回false。因此需要一个判断函数和遍历函数 递归实现1234567891011121314151617class Solution &#123; // 判断两个二叉树是否相同 public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 == null || t2 == null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false; &#125; // 递归调用遍历二叉树s public boolean isSubtree(TreeNode s, TreeNode t) &#123; if(s == null &amp;&amp; t == null) return true; if(s == null || t == null) return false; return isSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[另一个树的子树(面试题26：树的子结构)题目描述给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。示例 1:给定的树 s: 3 / \ 4 5 / \ 1 2给定的树 t： 4 / \ 1 2返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2:给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2返回 false。 算法思想遍历二叉树s，依次以每个节点为根节点，与二叉树t进行比较，看是否相同，若s中存在以某个节点为跟节点的子树与t完全相同，则返回true,否则返回false。因此需要一个判断函数和遍历函数 递归实现1234567891011121314151617class Solution &#123; // 判断两个二叉树是否相同 public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 == null || t2 == null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false; &#125; // 递归调用遍历二叉树s public boolean isSubtree(TreeNode s, TreeNode t) &#123; if(s == null &amp;&amp; t == null) return true; if(s == null || t == null) return false; return isSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t); &#125;&#125; 剑指Offer面试题26中是判断是否存在子结构，与本题差别不大，修改下isSame函数，t2遍历完时t1还有子节点也返回true123456789public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 != null &amp;&amp; t2 == null) return true; if(t1 == null &amp;&amp; t2 != null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -84,8 +84,8 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>动态规划</tag>
-        <tag>递归</tag>
         <tag>面试题</tag>
+        <tag>递归</tag>
         <tag>字符串</tag>
       </tags>
   </entry>
@@ -236,14 +236,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java继承类]]></title>
-    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[快排]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
@@ -252,6 +244,25 @@
       </categories>
       <tags>
         <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java继承类]]></title>
+    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[链表实现]]></title>
+    <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -266,17 +277,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[链表实现]]></title>
-    <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
-    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[阿里笔试-着色问题]]></title>
     <url>%2F2018%2F06%2F09%2F%E9%98%BF%E9%87%8C%E7%BC%96%E7%A8%8B%E9%A2%98%2F</url>
     <content type="text"><![CDATA[题目描述将一个圆分为N个扇形，使用M个颜色对这些扇形进行填充，相邻扇形的颜色不能相同，问：有多少种填充方式例如：若N=3，M=3，则有6种方式。样例输入：5 5样例输出：1020 算法思路思路：用递归比较好解决。设最终状态为f(n, m), 一共有两种情况到达最终状态：填最后一个扇形时，它的相邻两个扇形颜色一样和不一样。不一样时，可用颜色为m-2，从状态f(n, m-1)到达；一样时，可用颜色m-1,从状态f(n, m-2)到达.递推数列：f(n,m) = (m-2)f(n, m-1) + (m-1)f(n, m-2)初值：f(n, 1) = n; f(n, 2) = n(n-1); f(n, 3) = n(n-1)*(n-2) 递归实现12345678910111213141516171819202122public class Demo01 &#123; public static int f(int n, int m) &#123; if(n == 1) &#123; return m; &#125; if(n == 2) &#123; return m*(m-1); &#125; if(n == 3) &#123; return m*(m-1)*(m-2); &#125; return (m-2)*f(n-1, m) + (m-1)*f(n-2, m); //f(n, m) = (m-2)*f(n-1, m) + (m-2)*f(n-2, m) &#125; //n-1个扇形时，相邻的两个扇形颜色必定不同，因此是m-2 public static void main(String [] args) &#123; //n-2个扇形时，相邻的两个扇形颜色可以不同，因此是m-1 Scanner sc = new Scanner(System.in); int n = sc.nextInt(); // 扇形个数 int m = sc.nextInt(); // 颜色数目 sc.close(); int num = f(n, m); System.out.println(num); &#125;&#125;]]></content>
@@ -284,8 +284,8 @@
         <category>面试</category>
       </categories>
       <tags>
-        <tag>递归</tag>
         <tag>面试题</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -324,18 +324,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-乘积最大子序列]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记录下最大值和最小值。状态转移方程：dp[i] = max(max,dp[i-1])max = max(maxnum[i],minnum[i],nums[i])min = min(maxnum[i],minnum[i],nums[i])其中，dp[i]表示前i个数中的最大乘积，maxm表示以第i-1个字符结尾的最大乘积,minm表示以第i-1个字符结尾的最小乘积,nums[i]即为第i个数。 DP实现123456789101112131415161718192021class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; dp[0] = nums[0]; int max = nums[0]; int min = nums[0]; for(int i = 1; i &lt; nums.length; i++)&#123; if(nums[i] &gt;= 0)&#123; max = Math.max(nums[i], max*nums[i]); min = Math.min(nums[i], min*nums[i]); &#125;else&#123; int temp = max; max = Math.max(nums[i], min*nums[i]); min = Math.min(nums[i], temp*nums[i]); &#125; dp[i] = Math.max(max, dp[i-1]); &#125; return dp[nums.length-1]; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[DP-最大上升子序列LIS]]></title>
     <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
     <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
@@ -369,6 +357,18 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP-乘积最大子序列]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记录下最大值和最小值。状态转移方程：dp[i] = max(max,dp[i-1])max = max(maxnum[i],minnum[i],nums[i])min = min(maxnum[i],minnum[i],nums[i])其中，dp[i]表示前i个数中的最大乘积，maxm表示以第i-1个字符结尾的最大乘积,minm表示以第i-1个字符结尾的最小乘积,nums[i]即为第i个数。 DP实现123456789101112131415161718192021class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; dp[0] = nums[0]; int max = nums[0]; int min = nums[0]; for(int i = 1; i &lt; nums.length; i++)&#123; if(nums[i] &gt;= 0)&#123; max = Math.max(nums[i], max*nums[i]); min = Math.min(nums[i], min*nums[i]); &#125;else&#123; int temp = max; max = Math.max(nums[i], min*nums[i]); min = Math.min(nums[i], temp*nums[i]); &#125; dp[i] = Math.max(max, dp[i-1]); &#125; return dp[nums.length-1]; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
