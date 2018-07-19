@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[WPF USB-HID项目]]></title>
+    <url>%2F2018%2F07%2F19%2FWPF%20USB-HID%E9%A1%B9%E7%9B%AE%2F</url>
+    <content type="text"><![CDATA[项目GitHub链接记录部分项目中遇到的问题和解决方案 项目上传GitHub 安装Git,进入项目目录，点击“Git Bash Here”，打开git命令行 输入“git init”，将项目文件夹加入git管理 输入“git add .”（不要漏了“.”），将文件夹全部内容添加到git。 输入“git commit -m “first commit””（“git commit -m “提交信息””） 输入“git remote add origin https://github.com/ResultLv/SuzhouClient”（git remote add origin 你自己的https地址），连接你的guthub仓库。 输入“git push -u origin master”，上传项目到Github。这里会要求输入Github的账号密码，按要求输入就可以。 USB单例模式USB-HID设备在连接后只能由当前实例的输入输出流执行写入读出操作，在多个页面实例化USB对象后写入命令无效。想到的可行的解决办法是全局只实例化一个对象，因此可以采用单例模式 USB类中定义单例12345678910111213141516171819202122232425// 定义一个静态变量来保存类的实例private static USBHID uniqueInstance;// 定义一个标识确保线程同步private static readonly object locker = new object();public static USBHID GetInstance()&#123; // 当第一个线程运行到这里时，此时会对locker对象 "加锁"， // 当第二个线程运行该方法时，首先检测到locker对象为"加锁"状态，该线程就会挂起等待第一个线程解锁 // lock语句运行完之后（即线程运行完之后）会对该对象"解锁" // 双重锁定只需要一句判断就可以了 if (uniqueInstance == null) &#123; lock (locker) &#123; // 如果类的实例不存在则创建，否则直接返回 if (uniqueInstance == null) &#123; uniqueInstance = new USBHID(); &#125; &#125; &#125; return uniqueInstance;&#125; VeiwModel中获取实例12// 获取USB唯一实例public static USBHID usbHID = USBHID.GetInstance(); MVVM模式下登录窗体关闭MVVM模式下界面和逻辑分离，在登录成功后我们需要关闭弹出的登录界面，而在ViewModel中又不能直接关闭窗口，该怎么实现这个功能呢？控件有个IsEnabled属性，可以禁用启用控件。我们可以在ViewModel中绑定IsEnabled属性，登录成功后修改这个属性的值为false，后台写一个IsEnabledChanged事件来捕获值的改变，发生改变时关闭该窗口即可。 MVVM模式下登录成功跳转View登录按钮绑定signin命令，且附带grid控件作为参数，frame控件实现登录成功后的跳转 绑定的打开登录窗口命令12345678910111213141516171819202122232425262728public ICommand signin // 打开登录页面&#123; get &#123; return new DelegateCommand&lt;Grid&gt;((grid) =&gt; //使用Prism框架实现的DelegateCommand类 &#123; if (USBHID.isOpened) &#123; // 登录前先判断用户名是否已设置(发送中断命令给USB设备) int isSet = int.Parse(getReturn("04 00").Substring(5, 1)); // 已设置则跳转至登录界面 if (isSet == 0) &#123; hasSet(grid); &#125; else &#123; MessageBox.Show("该设备还未设置过账号，请设置用户名和密码"); user setUser = new user(); setUser.ShowDialog(); &#125; &#125; else MessageBox.Show("USB未插入或已变为外存"); &#125;); &#125;&#125; 这个地方将grid作为参数传入是为了通过grid.chilren获取子控件修改界面，获取到farme控件实现登录后的跳转 调用的hasSet函数实现跳转和修改主界面12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455public void hasSet(Grid grid)&#123; DockPanel loginPanel = null; Frame mainFrame = null; for (int i = 0; i &lt; grid.Children.Count; i++) &#123; if (grid.Children[i] is DockPanel) &#123; loginPanel = (DockPanel)grid.Children[i]; // 获取登录按钮所在panel &#125; if(grid.Children[i] is Frame) &#123; mainFrame = (Frame)grid.Children[i]; // 获取frame控件 &#125; &#125; login log = new login(); log.ShowDialog(); if (log.hasLogin == true) //如果登录成功，则在主界面修改View &#123; loginSuccess = true; string UserName = log.userName; loginPanel.Children.Clear(); TextBlock txBlock = new TextBlock(); txBlock.Text = UserName + "，欢迎您！"; txBlock.FontSize = 14; txBlock.Margin = new Thickness(0, 0, 10, 0); txBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Right; txBlock.VerticalAlignment = System.Windows.VerticalAlignment.Center; Button btn = new Button(); btn.Content = "退出登录"; btn.FontSize = 14; btn.Width = 70; btn.Height = 20; btn.Margin = new Thickness(0, 0, 10, 0); DockPanel.SetDock(btn, Dock.Right); btn.Command = exitLogin; btn.CommandParameter = grid; loginPanel.Children.Add(btn); loginPanel.Children.Add(txBlock); try &#123; //登录成功实现跳转 Thread.Sleep(1400); mainFrame.Navigate(new Uri("/View/display.xaml", UriKind.Relative)); &#125; catch (System.NullReferenceException) &#123; MessageBox.Show(mainFrame.ToString()); &#125; &#125;&#125; DataList数据绑定ViewItemSource绑定数据源datalist, DataGridTextColumn依次绑定各个属性, 显示效果如下图所示 ObservableCollection使用123456789101112131415161718ObservableCollection&lt;Data&gt; _datalist = new ObservableCollection&lt;Data&gt;();public ObservableCollection&lt;Data&gt; datalist&#123; set &#123; _datalist = value; RaisePropertyChanged("datalist"); &#125; get &#123; return datalistHandle(_datalist); &#125;&#125;public ObservableCollection&lt;Data&gt; datalistHandle(ObservableCollection&lt;Data&gt; _datalist)&#123; int len = _datalist.Count; for (int i = 0; i &lt; len; i++) &#123; if (_datalist[i].Dis.Equals("1")) _datalist[i].Dis = "未拆除"; if (_datalist[i].Dis.Equals("0")) _datalist[i].Dis = "已拆除"; &#125; return _datalist;&#125; datalist赋值1234567891011121314151617// 读取所有数据public ICommand readAll&#123; get &#123; return new DelegateCommand(() =&gt; &#123; datalist.Clear(); List&lt;List&lt;string&gt;&gt; dataRead = read(); for (int i = 0; i &lt; dataRead.Count; i++) &#123; datalist.Add(new Data(int.Parse(dataRead[i][0]), dataRead[i][1], int.Parse(dataRead[i][2]), dataRead[i][3], dataRead[i][4], dataRead[i][5], dataRead[i][6], int.Parse(dataRead[i][7]), int.Parse(dataRead[i][8]), dataRead[i][9])); &#125; &#125;); &#125;&#125;]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>WPF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[面试题25：合并排序链表]]></title>
     <url>%2F2018%2F07%2F09%2F%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[合并两个排序链表题目描述将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。示例：输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4 循环解法12345678910111213141516171819202122232425262728293031323334353637383940class Solution &#123; public ListNode mergeTwoLists(ListNode l1, ListNode l2) &#123; if(l1 == null) return l2; if(l2 == null) return l1; ListNode head,p; if(l1.val &lt;= l2.val)&#123; head = l1; l1 = l1.next; &#125;else&#123; head = l2; l2 = l2.next; &#125; p = head; while(l1 != null &amp;&amp; l2 != null)&#123; if(l1.val &lt;= l2.val)&#123; p.next = l1; l1 = l1.next; &#125;else&#123; p.next = l2; l2 = l2.next; &#125; p = p.next; &#125; if(l1 == null)&#123; while(l2 != null)&#123; p.next = l2; p = p.next; l2 = l2.next; &#125; &#125; if(l2 == null)&#123; while(l1 != null)&#123; p.next = l1; p = p.next; l1 = l1.next; &#125; &#125; return head; &#125;&#125; 递归解法123456789101112131415class Solution &#123; public ListNode mergeTwoLists(ListNode l1, ListNode l2) &#123; if(l1 == null) return l2; if(l2 == null) return l1; ListNode head = null; //每次递归的下个节点 if(l1.val &lt; l2.val)&#123; head = l1;; head.next = mergeTwoLists(l1.next, l2); //当前节点与下个节点连接 &#125;else&#123; head = l2; head.next = mergeTwoLists(l1, l2.next); &#125; return head; &#125;&#125; 合并k个排序链表题目描述合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。示例:输入:[ 1-&gt;4-&gt;5, 1-&gt;3-&gt;4, 2-&gt;6]输出: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6 依次两两合并(时间复杂度较高)123456789public ListNode mergeKLists(ListNode[] lists) &#123; if(lists.length == 0) return null; if(lists.length == 1) return lists[0]; ListNode result = null; for(int i = 0; i &lt; lists.length; i++)&#123; result = mergeTwoLists(result, lists[i]); &#125; return result;&#125; 原地合并12345678910111213public ListNode mergeKLists(ListNode[] lists) &#123; if(lists.length == 0) return null; if(lists.length == 1) return lists[0]; int begin = 0, end = lists.length-1; while(end &gt; 0)&#123; begin = 0; while(begin &lt; end)&#123; // 首尾两两合并后新链表放首位置 lists[begin] = mergeTwoLists(lists[begin], lists[end]); begin++; end--; &#125; &#125; return lists[0]; //lists[0]中即为全部合并结束后的最终链表&#125; 分治合并1234567891011121314public ListNode partition(ListNode[] lists, int start, int end)&#123; if (start == end) return lists[start]; if(start &lt; end) &#123; ListNode l1 = partition(lists, start, (start + end) / 2); ListNode l2 = partition(lists, (start + end) / 2 + 1, end); return mergeTwoLists(l1, l2); //对半划分直至单个链表，再自底向上两两合并 &#125; return null;&#125;public ListNode mergeKLists(ListNode[] lists) &#123; if(lists.length == 0) return null; if(lists.length == 1) return lists[0]; return partition(lists, 0, lists.length-1);&#125;]]></content>
@@ -212,25 +223,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[链表实现]]></title>
-    <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
-    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java继承类]]></title>
-    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[快排]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
@@ -251,6 +243,25 @@
       <tags>
         <tag>二叉树</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[链表实现]]></title>
+    <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java继承类]]></title>
+    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[阿里笔试-着色问题]]></title>
@@ -300,18 +311,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最长递增子序列的个数]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[括号生成]]></title>
     <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
     <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
@@ -327,6 +326,18 @@
     <title><![CDATA[DP-乘积最大子序列]]></title>
     <url>%2F2018%2F06%2F09%2FDP-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
     <content type="text"><![CDATA[题目描述给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。示例 1:输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。 示例 2:输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。 算法思路本题是求最大乘积，是最大子段和的变种。最大乘积可以由正数正数和负数负数得到，因此，需要同时记录下最大值和最小值。状态转移方程：dp[i] = max(max,dp[i-1])max = max(maxnum[i],minnum[i],nums[i])min = min(maxnum[i],minnum[i],nums[i])其中，dp[i]表示前i个数中的最大乘积，maxm表示以第i-1个字符结尾的最大乘积,minm表示以第i-1个字符结尾的最小乘积,nums[i]即为第i个数。 DP实现123456789101112131415161718192021class Solution &#123; public int maxProduct(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; dp[0] = nums[0]; int max = nums[0]; int min = nums[0]; for(int i = 1; i &lt; nums.length; i++)&#123; if(nums[i] &gt;= 0)&#123; max = Math.max(nums[i], max*nums[i]); min = Math.min(nums[i], min*nums[i]); &#125;else&#123; int temp = max; max = Math.max(nums[i], min*nums[i]); min = Math.min(nums[i], temp*nums[i]); &#125; dp[i] = Math.max(max, dp[i-1]); &#125; return dp[nums.length-1]; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP-最长递增子序列的个数]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
