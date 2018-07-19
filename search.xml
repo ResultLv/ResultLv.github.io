@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[二叉树算法题]]></title>
     <url>%2F2018%2F07%2F19%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AE%97%E6%B3%95%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[另一个树的子树(面试题26：树的子结构)题目描述给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。示例 1:给定的树 s: 3 / \ 4 5 / \ 1 2给定的树 t： 4 / \ 1 2返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2:给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2返回 false。 算法思想遍历二叉树s，依次以每个节点为根节点，与二叉树t进行比较，看是否相同，若s中存在以某个节点为跟节点的子树与t完全相同，则返回true,否则返回false。因此需要一个判断函数和遍历函数 递归实现1234567891011121314151617class Solution &#123; // 判断两个二叉树是否相同 public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 == null || t2 == null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false; &#125; // 递归调用遍历二叉树s public boolean isSubtree(TreeNode s, TreeNode t) &#123; if(s == null &amp;&amp; t == null) return true; if(s == null || t == null) return false; return isSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t); &#125;&#125; 剑指Offer面试题26中是判断是否存在子结构，与本题差别不大，修改下isSame函数，t2遍历完时t1还有子节点也返回true123456789public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 != null &amp;&amp; t2 == null) return true; if(t1 == null &amp;&amp; t2 != null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false;&#125;]]></content>
+    <content type="text"><![CDATA[另一个树的子树(面试题26：树的子结构)题目描述给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。示例 1:给定的树 s: 3 / \ 4 5 / \ 1 2给定的树 t： 4 / \ 1 2返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2:给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2返回 false。 算法思想遍历二叉树s，依次以每个节点为根节点，与二叉树t进行比较，看是否相同，若s中存在以某个节点为跟节点的子树与t完全相同，则返回true,否则返回false。因此需要一个判断函数和遍历函数 递归实现1234567891011121314151617class Solution &#123; // 判断两个二叉树是否相同 public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 == null || t2 == null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false; &#125; // 递归调用遍历二叉树s public boolean isSubtree(TreeNode s, TreeNode t) &#123; if(s == null &amp;&amp; t == null) return true; if(s == null || t == null) return false; return isSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t); &#125;&#125; 剑指Offer面试题26中是判断是否存在子结构，与本题差别不大，修改下isSame函数，t2遍历完时t1还有子节点也返回true123456789public boolean isSame(TreeNode t1, TreeNode t2)&#123; if(t1 == null &amp;&amp; t2 == null) return true; if(t1 != null &amp;&amp; t2 == null) return true; if(t1 == null &amp;&amp; t2 != null) return false; if(t1.val == t2.val)&#123; return isSame(t1.left, t2.left) &amp;&amp; isSame(t1.right, t2.right); &#125; return false;&#125; 对称二叉树(面试题28：对称的二叉树)题目描述给定一个二叉树，检查它是否是镜像对称的。例如，二叉树 [1,2,2,3,4,4,3] 是对称的。 1 / \ 2 2 / \ / \3 4 4 3但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的: 1 / \ 2 2 \ \ 3 3 算法思路从根节点开始遍历左右子树，判断左右节点是否相等直至遍历完成 递归实现1234567891011121314class Solution &#123; public boolean cmpChild(TreeNode left, TreeNode right)&#123; if(left == null &amp;&amp; right == null) return true; if(left == null || right == null) return false; if(left.val == right.val)&#123; return cmpChild(left.left, right.right) &amp;&amp; cmpChild(left.right, right.left); &#125; return false; &#125; public boolean isSymmetric(TreeNode root) &#123; if(root == null) return true; return cmpChild(root.left, root.right); &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -150,8 +150,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
         <tag>PyTorch</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -162,8 +162,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
         <tag>PyTorch</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -231,9 +231,17 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>Keras</tag>
         <tag>深度学习</tag>
+        <tag>Keras</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java继承类]]></title>
+    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[快排]]></title>
@@ -245,14 +253,6 @@
       <tags>
         <tag>排序</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java继承类]]></title>
-    <url>%2F2018%2F06%2F09%2FJava%E7%BB%A7%E6%89%BF%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[父类12345678class Privilege&#123; String name; Map&lt;String, Integer&gt; Privileges = new HashMap&lt;&gt;(); public void setPrivileges(Map&lt;String, Integer&gt; Privileges) &#123; this.Privileges = Privileges; &#125;&#125; 子类继承12345class Role extends Privilege&#123; public Role(String name)&#123; this.name = name; &#125;&#125; 子类继承12345class User extends Privilege&#123; public User(String name)&#123; this.name = name; &#125;&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
   </entry>
   <entry>
     <title><![CDATA[链表实现]]></title>
@@ -324,9 +324,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最大上升子序列LIS]]></title>
-    <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
+    <title><![CDATA[DP-最长递增子序列的个数]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -336,9 +336,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最长递增子序列的个数]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个未排序的整数数组，找到最长递增子序列的个数。示例 1:输入: [1,3,5,4,7]输出: 2解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。 示例 2:输入: [2,2,2,2,2]输出: 5解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。 注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。 算法思路O(n^2)解法，DP实现12345678910111213141516171819202122232425262728293031cclass Solution &#123; public int findNumberOfLIS(int[] nums) &#123; if(nums.length == 0) return 0; int [] dp = new int [nums.length]; int [] count = new int [nums.length]; for(int i = 0; i &lt; nums.length; i++)&#123; dp[i] = count[i] = 1; &#125; int maxLen = 1; for(int i = 1; i &lt; nums.length; i++)&#123; for(int j = 0; j &lt; i; j++)&#123; if(nums[i] &gt; nums[j])&#123; if(dp[i] &lt; dp[j] + 1)&#123; dp[i] = dp[j] + 1; count[i] = count[j]; &#125;else if(dp[i] == dp[j] + 1)&#123; //统计当前长度子序列可由多少次长序列加1得到 count[i] += count[j]; &#125; &#125; &#125; maxLen = Math.max(maxLen, dp[i]); // System.out.println(count[i] + " " + dp[i]); &#125; int res = 0; for(int i = 0; i &lt; count.length; i++)&#123; // 考虑重复情况 if(dp[i] == maxLen) res += count[i]; &#125; return count[nums.length-1]; &#125;&#125;]]></content>
+    <title><![CDATA[DP-最大上升子序列LIS]]></title>
+    <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -384,14 +384,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP-最长回文子串]]></title>
-    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &#123; public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = len-1; i &gt;= 0; i--)&#123; dp[i][i] = true; for(int j = i; j &lt; len; j++)&#123; if(s.charAt(i) == s.charAt(j) &amp;&amp; (j-i&lt;=1 || dp[i+1][j-1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(i, j+1).length())&#123; longStr = s.substring(i, j+1); &#125; &#125; &#125; &#125; return longStr; &#125;&#125; 正向DP12345678910111213141516public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = 1; i &lt;= len; i++)&#123; for(int j = i; j &gt;= 1; j--)&#123; if(s.charAt(i-1) == s.charAt(j-1) &amp;&amp; (i-j&lt;=1 || dp[i-1][j+1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(j-1, i).length())&#123; longStr = s.substring(j-1, i); &#125; &#125; &#125; &#125; return longStr; &#125;]]></content>
+    <title><![CDATA[DP+回溯-单词拆分 II]]></title>
+    <url>%2F2018%2F06%2F09%2FDP%2B%E5%9B%9E%E6%BA%AF-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20II%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入:s = “catsanddog”wordDict = [“cat”, “cats”, “and”, “sand”, “dog”]输出:[ “cats and dog”, “cat sand dog”] 示例 2：输入:s = “pineapplepenapple”wordDict = [“apple”, “pen”, “applepen”, “pine”, “pineapple”]输出:[ “pine apple pen apple”, “pineapple pen apple”, “pine applepen apple”]解释: 注意你可以重复使用字典中的单词。 示例 3：输入:s = “catsandog”wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出:[] 算法思路这道题类似 Word Break I 判断是否能把字符串拆分为字典里的单词 @LeetCode 只不过要求计算的并不仅仅是是否能拆分，而是要求出所有的拆分方案。因此用递归。但是直接递归做会超时，原因是LeetCode里有几个很长但是无法拆分的情况，所以就先跑一遍Word Break I，先判断能否拆分，然后再进行拆分。 DP实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123; boolean isBreak(String s, List&lt;String&gt; wordDict) &#123; boolean[] canBreak = new boolean[s.length()+1]; canBreak[0] = true; for(int i=1; i&lt;=s.length(); i++) &#123; boolean flag = false; for(int j=0; j&lt;i; j++) &#123; if(canBreak[j] &amp;&amp; wordDict.contains(s.substring(j,i))) &#123; flag = true; break; &#125; &#125; canBreak[i] = flag; &#125; return canBreak[s.length()]; &#125; void dfs(String s, List&lt;String&gt; wordDict, String str, int index)&#123; String result = str; //记录字符串状态 int len = s.length(); String tmp = s.substring(index, len); if(wordDict.contains(tmp))&#123; //最后一段存在于字典中，则保存结果 str += tmp; res.add(str); &#125; List&lt;Integer&gt; listIndex = new ArrayList(); List&lt;String&gt; listStr = new ArrayList(); for(int i = index; i &lt; len; i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; listIndex.add(i+1); listStr.add(temp); &#125; &#125; String temp = result; //保存递归前的字符串状态，以便回溯 for(int i = 0; i &lt; listIndex.size(); i++)&#123; result += listStr.get(i) + " "; dfs(s, wordDict, result, listIndex.get(i)); result = temp; &#125; &#125; List&lt;String&gt; res = new ArrayList(); public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(!isBreak(s, wordDict)) return res; String str = ""; dfs(s, wordDict, str, 0); return res; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>LeetCode</tag>
+        <tag>回溯</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
@@ -408,15 +409,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DP+回溯-单词拆分 II]]></title>
-    <url>%2F2018%2F06%2F09%2FDP%2B%E5%9B%9E%E6%BA%AF-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20II%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入:s = “catsanddog”wordDict = [“cat”, “cats”, “and”, “sand”, “dog”]输出:[ “cats and dog”, “cat sand dog”] 示例 2：输入:s = “pineapplepenapple”wordDict = [“apple”, “pen”, “applepen”, “pine”, “pineapple”]输出:[ “pine apple pen apple”, “pineapple pen apple”, “pine applepen apple”]解释: 注意你可以重复使用字典中的单词。 示例 3：输入:s = “catsandog”wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出:[] 算法思路这道题类似 Word Break I 判断是否能把字符串拆分为字典里的单词 @LeetCode 只不过要求计算的并不仅仅是是否能拆分，而是要求出所有的拆分方案。因此用递归。但是直接递归做会超时，原因是LeetCode里有几个很长但是无法拆分的情况，所以就先跑一遍Word Break I，先判断能否拆分，然后再进行拆分。 DP实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123; boolean isBreak(String s, List&lt;String&gt; wordDict) &#123; boolean[] canBreak = new boolean[s.length()+1]; canBreak[0] = true; for(int i=1; i&lt;=s.length(); i++) &#123; boolean flag = false; for(int j=0; j&lt;i; j++) &#123; if(canBreak[j] &amp;&amp; wordDict.contains(s.substring(j,i))) &#123; flag = true; break; &#125; &#125; canBreak[i] = flag; &#125; return canBreak[s.length()]; &#125; void dfs(String s, List&lt;String&gt; wordDict, String str, int index)&#123; String result = str; //记录字符串状态 int len = s.length(); String tmp = s.substring(index, len); if(wordDict.contains(tmp))&#123; //最后一段存在于字典中，则保存结果 str += tmp; res.add(str); &#125; List&lt;Integer&gt; listIndex = new ArrayList(); List&lt;String&gt; listStr = new ArrayList(); for(int i = index; i &lt; len; i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; listIndex.add(i+1); listStr.add(temp); &#125; &#125; String temp = result; //保存递归前的字符串状态，以便回溯 for(int i = 0; i &lt; listIndex.size(); i++)&#123; result += listStr.get(i) + " "; dfs(s, wordDict, result, listIndex.get(i)); result = temp; &#125; &#125; List&lt;String&gt; res = new ArrayList(); public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(!isBreak(s, wordDict)) return res; String str = ""; dfs(s, wordDict, str, 0); return res; &#125;&#125;]]></content>
+    <title><![CDATA[DP-最长回文子串]]></title>
+    <url>%2F2018%2F06%2F09%2FDP-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。示例 1：输入: “babad”输出: “bab”注意: “aba”也是一个有效答案。 示例 2：输入: “cbbd”输出: “bb” 算法思路逆向DP12345678910111213141516171819class Solution &#123; public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = len-1; i &gt;= 0; i--)&#123; dp[i][i] = true; for(int j = i; j &lt; len; j++)&#123; if(s.charAt(i) == s.charAt(j) &amp;&amp; (j-i&lt;=1 || dp[i+1][j-1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(i, j+1).length())&#123; longStr = s.substring(i, j+1); &#125; &#125; &#125; &#125; return longStr; &#125;&#125; 正向DP12345678910111213141516public String longestPalindrome(String s) &#123; int len = s.length(); boolean [][] dp = new boolean [len+1][len+1]; String longStr = ""; for(int i = 1; i &lt;= len; i++)&#123; for(int j = i; j &gt;= 1; j--)&#123; if(s.charAt(i-1) == s.charAt(j-1) &amp;&amp; (i-j&lt;=1 || dp[i-1][j+1]))&#123; dp[i][j] = true; if(longStr.length() &lt; s.substring(j-1, i).length())&#123; longStr = s.substring(j-1, i); &#125; &#125; &#125; &#125; return longStr; &#125;]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>回溯</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
