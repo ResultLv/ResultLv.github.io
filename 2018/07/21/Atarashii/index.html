@@ -106,25 +106,21 @@
 
 
 
-  <meta name="description" content="题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入: s = “leetcode”, wordDict = [“leet”, “code”]输出: true解释: 返回 true 因为 “leetcode” 可以被拆分成 “l">
-<meta name="keywords" content="LeetCode,动态规划">
-<meta property="og:type" content="article">
-<meta property="og:title" content="DP-单词拆分 I">
-<meta property="og:url" content="https://resultlv.com/2018/06/09/DP-单词拆分 I/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Atarashii">
+<meta property="og:url" content="https://resultlv.com/2018/07/21/Atarashii/index.html">
 <meta property="og:site_name" content="ResultLv">
-<meta property="og:description" content="题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入: s = “leetcode”, wordDict = [“leet”, “code”]输出: true解释: 返回 true 因为 “leetcode” 可以被拆分成 “l">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-09T07:11:50.486Z">
+<meta property="og:updated_time" content="2018-07-21T03:23:53.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DP-单词拆分 I">
-<meta name="twitter:description" content="题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入: s = “leetcode”, wordDict = [“leet”, “code”]输出: true解释: 返回 true 因为 “leetcode” 可以被拆分成 “l">
+<meta name="twitter:title" content="Atarashii">
 
 
 
 
 
 
-  <link rel="canonical" href="https://resultlv.com/2018/06/09/DP-单词拆分 I/"/>
+  <link rel="canonical" href="https://resultlv.com/2018/07/21/Atarashii/"/>
 
 
 
@@ -134,7 +130,7 @@
   };
 </script>
 
-  <title>DP-单词拆分 I | ResultLv</title>
+  <title>Atarashii | ResultLv</title>
   
 
 
@@ -347,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://resultlv.com/2018/06/09/DP-单词拆分 I/">
+    <link itemprop="mainEntityOfPage" href="https://resultlv.com/2018/07/21/Atarashii/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Result Lv">
@@ -364,7 +360,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DP-单词拆分 I
+          <h1 class="post-title" itemprop="name headline">Atarashii
               
             
           </h1>
@@ -389,34 +385,12 @@
                 
               
 
-              <time title="创建时间：2018-06-09 10:51:17 / 修改时间：15:11:50" itemprop="dateCreated datePublished" datetime="2018-06-09T10:51:17+08:00">2018-06-09</time>
+              <time title="创建时间：2018-07-21 11:23:53" itemprop="dateCreated datePublished" datetime="2018-07-21T11:23:53+08:00">2018-07-21</time>
             
 
-            
-              
-
-              
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -453,13 +427,7 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。<br>说明：<br>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：<br>输入: s = “leetcode”, wordDict = [“leet”, “code”]<br>输出: true<br>解释: 返回 true 因为 “leetcode” 可以被拆分成 “leet code”。</p>
-<p>示例 2：<br>输入: s = “applepenapple”, wordDict = [“apple”, “pen”]<br>输出: true<br>解释: 返回 true 因为 “applepenapple” 可以被拆分成 “apple pen apple”。<br>     注意你可以重复使用字典中的单词。</p>
-<p>示例 3：<br>输入: s = “catsandog”, wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]<br>输出: false<br><a id="more"></a></p>
-<h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><p>动态规划的思路：<br>将问题拆分成更小的子问题。用dp[i]表示0到i的子字符串是否可以拆分成满足条件的单词，在计算dp[i]的时候，我们已经知道dp[0],dp[1],…,dp[i-1],如果以i为结尾的j~i子串是满足条件的，并且0~j的子串也是在字典中的，那么dp[i]就是true。<br>用公式表示就是：</p>
-<p><center><font color="red" size="5" align="center">dp[j]&amp;&amp;s.substring[j,i+1]∈dict</font></center></p>
-<h3 id="DP实现"><a href="#DP实现" class="headerlink" title="DP实现"></a>DP实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">wordBreak</span><span class="params">(String s, List&lt;String&gt; wordDict)</span> </span>&#123;;</span><br><span class="line">        <span class="keyword">boolean</span> [] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[s.length()+<span class="number">1</span>]；</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[j] &amp;&amp; wordDict.contains(s.substring(j, i+<span class="number">1</span>)))&#123;</span><br><span class="line">                    dp[i+<span class="number">1</span>] = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[s.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="DFS解法，超时"><a href="#DFS解法，超时" class="headerlink" title="DFS解法，超时"></a>DFS解法，超时</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(String s, List&lt;String&gt; wordDict, <span class="keyword">int</span> index)</span></span>&#123; <span class="comment">// 超时</span></span><br><span class="line">        String left = s.substring(index, s.length());</span><br><span class="line">        <span class="keyword">if</span>(wordDict.contains(left))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; s.length(); i++)&#123;</span><br><span class="line">            String temp = s.substring(index, i+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(wordDict.contains(temp))&#123;</span><br><span class="line">                list.add(i+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(Integer each:list) &#123;</span><br><span class="line">            <span class="keyword">if</span>(dfs(s, wordDict, each))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">wordBreak</span><span class="params">(String s, List&lt;String&gt; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dfs(s, wordDict, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
       
     </div>
 
@@ -481,14 +449,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
-          
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
-          
-        </div>
-      
 
       
       
@@ -498,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/09/DP+回溯-单词拆分 II/" rel="next" title="DP+回溯-单词拆分 II">
-                <i class="fa fa-chevron-left"></i> DP+回溯-单词拆分 II
+              <a href="/2018/07/19/栈算法题/" rel="next" title="栈算法题">
+                <i class="fa fa-chevron-left"></i> 栈算法题
               </a>
             
           </div>
@@ -507,10 +467,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/09/回溯-分割回文串/" rel="prev" title="回溯-分割回文串">
-                回溯-分割回文串 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,17 +515,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -734,22 +681,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思路"><span class="nav-number">1.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP实现"><span class="nav-number">1.2.</span> <span class="nav-text">DP实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DFS解法，超时"><span class="nav-number">1.2.1.</span> <span class="nav-text">DFS解法，超时</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
