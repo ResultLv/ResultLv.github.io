@@ -106,19 +106,20 @@
 
 
 
-  <meta name="description" content="最大自序和(面试题42：连续子数组的最大和)题目描述 思路 一般解法(找规律)初始化两个记录max和sum,顺序遍历数组，累加和至当前位置，若累加的和sum &amp;gt; 0，则判断sum是否大于max，若大于则更新max；若累加的和sum &amp;lt; 0，则丢弃该段子数组，重置sum为0，继续往下遍历。 动态规划维护一个数组dp[i]记录以i结尾的子数组的最大和，然后求出max(dp[i])状态转移方">
+  <meta name="description" content="最大子序和(面试题42：连续子数组的最大和)题目描述">
 <meta name="keywords" content="LeetCode,面试题,数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数组算法题">
 <meta property="og:url" content="https://resultlv.com/2018/07/26/数组算法题/index.html">
 <meta property="og:site_name" content="ResultLv">
-<meta property="og:description" content="最大自序和(面试题42：连续子数组的最大和)题目描述 思路 一般解法(找规律)初始化两个记录max和sum,顺序遍历数组，累加和至当前位置，若累加的和sum &amp;gt; 0，则判断sum是否大于max，若大于则更新max；若累加的和sum &amp;lt; 0，则丢弃该段子数组，重置sum为0，继续往下遍历。 动态规划维护一个数组dp[i]记录以i结尾的子数组的最大和，然后求出max(dp[i])状态转移方">
+<meta property="og:description" content="最大子序和(面试题42：连续子数组的最大和)题目描述">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-5c1fc15d93d7baa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-26T03:01:23.967Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12653638-6e63e197af7f1c46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-07-26T03:15:59.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组算法题">
-<meta name="twitter:description" content="最大自序和(面试题42：连续子数组的最大和)题目描述 思路 一般解法(找规律)初始化两个记录max和sum,顺序遍历数组，累加和至当前位置，若累加的和sum &amp;gt; 0，则判断sum是否大于max，若大于则更新max；若累加的和sum &amp;lt; 0，则丢弃该段子数组，重置sum为0，继续往下遍历。 动态规划维护一个数组dp[i]记录以i结尾的子数组的最大和，然后求出max(dp[i])状态转移方">
+<meta name="twitter:description" content="最大子序和(面试题42：连续子数组的最大和)题目描述">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/12653638-5c1fc15d93d7baa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -391,7 +392,7 @@
                 
               
 
-              <time title="创建时间：2018-07-26 10:41:48 / 修改时间：11:01:23" itemprop="dateCreated datePublished" datetime="2018-07-26T10:41:48+08:00">2018-07-26</time>
+              <time title="创建时间：2018-07-26 10:41:48 / 修改时间：11:15:59" itemprop="dateCreated datePublished" datetime="2018-07-26T10:41:48+08:00">2018-07-26</time>
             
 
             
@@ -455,13 +456,17 @@
       
 
       
-        <h3 id="最大自序和-面试题42：连续子数组的最大和"><a href="#最大自序和-面试题42：连续子数组的最大和" class="headerlink" title="最大自序和(面试题42：连续子数组的最大和)"></a>最大自序和(面试题42：连续子数组的最大和)</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p><img src="https://upload-images.jianshu.io/upload_images/12653638-5c1fc15d93d7baa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+        <h3 id="最大子序和-面试题42：连续子数组的最大和"><a href="#最大子序和-面试题42：连续子数组的最大和" class="headerlink" title="最大子序和(面试题42：连续子数组的最大和)"></a>最大子序和(面试题42：连续子数组的最大和)</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p><img src="https://upload-images.jianshu.io/upload_images/12653638-5c1fc15d93d7baa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<a id="more"></a>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
 <li>一般解法(找规律)<br>初始化两个记录max和sum,顺序遍历数组，累加和至当前位置，若累加的和sum &gt; 0，则判断sum是否大于max，若大于则更新max；若累加的和sum &lt; 0，则丢弃该段子数组，重置sum为0，继续往下遍历。</li>
-<li>动态规划<br>维护一个数组dp[i]记录以i结尾的子数组的最大和，然后求出max(dp[i])<br>状态转移方程如下：<br>$dp[i+1] = nums[i]        if dp[i] &lt; 0$<br>$dp[i+1] = dp[i] + nums[i]        if dp[i-1] &gt;= 0$</li>
+<li>动态规划<br>维护一个数组dp[i]记录以i结尾的子数组的最大和，然后求出max(dp[i])<br>状态转移方程如下：<br>$dp[i+1] = nums[i] \quad if\ dp[i] &lt; 0$<br>$dp[i+1] = dp[i] + nums[i] \quad if\ dp[i-1] \ge 0$</li>
 </ul>
 <h4 id="一般实现"><a href="#一般实现" class="headerlink" title="一般实现"></a>一般实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">            <span class="keyword">if</span>(max &lt;= sum)&#123;</span><br><span class="line">                max = sum;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sum &lt;= <span class="number">0</span>)&#123;   <span class="comment">//一旦某段元素和小于0，则丢弃该段元素</span></span><br><span class="line">                sum = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//动态规划</span></span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length+<span class="number">1</span>];  <span class="comment">//dp数组用于记录以i结尾的子数组中的最大和</span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> max = Integer.MIN_VALUE;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(dp[i] &gt;= <span class="number">0</span>) dp[i+<span class="number">1</span>] = dp[i] + nums[i];</span><br><span class="line">            <span class="keyword">else</span> dp[i+<span class="number">1</span>] = nums[i];</span><br><span class="line">            max = max &gt; dp[i+<span class="number">1</span>] ? max : dp[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="盛最多水的容器"><a href="#盛最多水的容器" class="headerlink" title="盛最多水的容器"></a>盛最多水的容器</h3><h4 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h4><p><img src="https://upload-images.jianshu.io/upload_images/12653638-6e63e197af7f1c46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h4><p>初始化容积最大值max = 0，使用左右两个指针i, j分别指向数组首尾两端，计算容积，若大于max则更新容积最大值，然后移动i,j中所指向的较小的线，重新计算容积并更新最大值直至两指针相遇，最终max所记录的就是容积的最大值</p>
+<h4 id="首尾指针实现"><a href="#首尾指针实现" class="headerlink" title="首尾指针实现"></a>首尾指针实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = height.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxArea = (height.length-<span class="number">1</span>)*Math.min(height[l], height[r]);</span><br><span class="line">        <span class="keyword">while</span>(l != r)&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[l] &lt;= height[r])&#123;</span><br><span class="line">                l++;</span><br><span class="line">                maxArea = Math.max(maxArea, (r-l)*Math.min(height[l], height[r]));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(height[l] &gt; height[r])&#123;</span><br><span class="line">                r--;</span><br><span class="line">                maxArea = Math.max(maxArea, (r-l)*Math.min(height[l], height[r]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxArea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -511,6 +516,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/26/面试题41：数据流中的中位数/" rel="prev" title="面试题41：数据流中的中位数">
+                面试题41：数据流中的中位数 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -588,7 +597,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -746,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最大自序和-面试题42：连续子数组的最大和"><span class="nav-number">1.</span> <span class="nav-text">最大自序和(面试题42：连续子数组的最大和)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一般实现"><span class="nav-number">1.3.</span> <span class="nav-text">一般实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态规划"><span class="nav-number">1.4.</span> <span class="nav-text">动态规划</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最大子序和-面试题42：连续子数组的最大和"><span class="nav-number">1.</span> <span class="nav-text">最大子序和(面试题42：连续子数组的最大和)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一般实现"><span class="nav-number">1.3.</span> <span class="nav-text">一般实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态规划"><span class="nav-number">1.4.</span> <span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盛最多水的容器"><span class="nav-number">2.</span> <span class="nav-text">盛最多水的容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法思想"><span class="nav-number">2.2.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#首尾指针实现"><span class="nav-number">2.3.</span> <span class="nav-text">首尾指针实现</span></a></li></ol></li></ol></div>
             
 
           </div>
