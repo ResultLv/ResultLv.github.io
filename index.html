@@ -387,7 +387,7 @@
                 
               
 
-              <time title="创建时间：2018-07-26 11:17:51 / 修改时间：11:45:16" itemprop="dateCreated datePublished" datetime="2018-07-26T11:17:51+08:00">2018-07-26</time>
+              <time title="创建时间：2018-07-26 11:17:51 / 修改时间：11:48:22" itemprop="dateCreated datePublished" datetime="2018-07-26T11:17:51+08:00">2018-07-26</time>
             
 
             
@@ -444,55 +444,14 @@
 
       
         
-          
-            <h3 id="数据流中的中位数-面试题41"><a href="#数据流中的中位数-面试题41" class="headerlink" title="数据流中的中位数(面试题41)"></a>数据流中的中位数(面试题41)</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p><img src="https://upload-images.jianshu.io/upload_images/12653638-ccb3d87a8a951c7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>由于数据是从一个数据流中读出来的，因而数据的数目随着时间的变化而增加，所以我们需要一个数据容器来保存从流中读取的数据，当有新的数据从流中读出来时，这些数据就插入数据容器中。</p>
-<p><strong>容器效率分析：</strong></p>
-<table>
-<thead>
-<tr>
-<th>数据结构</th>
-<th>插入的时间复杂度</th>
-<th>得到中位数的时间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>没有排序的数组</td>
-<td>$O(1)$</td>
-<td>$O(n)$</td>
-</tr>
-<tr>
-<td>排序的数组</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
-</tr>
-<tr>
-<td>排序的链表</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
-</tr>
-<tr>
-<td> 二叉搜索树</td>
-<td>平均$O($log$n)$，最差$O(n)$</td>
-<td>平均$O($log$n)$，最差$O(n)$</td>
-</tr>
-<tr>
-<td>平衡二叉树(AVL树)</td>
-<td>$O($log$n)$</td>
-<td>$O(1)$</td>
-</tr>
-<tr>
-<td>最大堆和最小堆</td>
-<td>$O($log$n)$</td>
-<td>$O(1)$ </td>
-</tr>
-</tbody>
-</table>
-<h4 id="排序列表实现"><a href="#排序列表实现" class="headerlink" title="排序列表实现"></a>排序列表实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MedianFinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        list.add(num);</span><br><span class="line">        <span class="keyword">while</span>(index &lt; list.size()-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num &gt;= list.get(index)) index++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = list.size()-<span class="number">1</span>; i &gt; index; i--)&#123;</span><br><span class="line">            list.set(i, list.get(i-<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        list.set(index, num);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = list.size();</span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">double</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(len%<span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">            res = (list.get(len/<span class="number">2</span>-<span class="number">1</span>) + list.get(len/<span class="number">2</span>))/<span class="number">2.0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> res = list.get(len/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MedianFinder object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MedianFinder obj = new MedianFinder();</span></span><br><span class="line"><span class="comment"> * obj.addNum(num);</span></span><br><span class="line"><span class="comment"> * double param_2 = obj.findMedian();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/12653638-76a24cf56772df61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>顺序表实现500多毫秒，接近超时的边缘，后续考虑添加用堆来实现</strong></p>
-
-          
+          <h3 id="数据流中的中位数-面试题41"><a href="#数据流中的中位数-面试题41" class="headerlink" title="数据流中的中位数(面试题41)"></a>数据流中的中位数(面试题41)</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p><img src="https://upload-images.jianshu.io/upload_images/12653638-ccb3d87a8a951c7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/26/面试题41：数据流中的中位数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
