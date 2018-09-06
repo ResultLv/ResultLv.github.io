@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[常用设计模式浅析]]></title>
+    <url>%2F2018%2F09%2F06%2F%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%B5%85%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[概况总体来说设计模式分为三大类： 创建型模式，共五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。 结构型模式，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。 行为型模式，共十一种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。 设计模式的六大原则1.开闭原则（Open Close Principle）开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。2.里氏代换原则（Liskov Substitution Principle） 子类的能力必须大于等于父类，即父类可以使用的方法，子类都可以使用。 返回值也是同样的道理。假设一个父类方法返回一个List，子类返回一个ArrayList，这当然可以。如果父类方法返回一个ArrayList，子类返回一个List，就说不通了。这里子类返回值的能力是比父类小的。 有抛出异常的情况。任何子类方法可以声明抛出父类方法声明异常的子类,而不能声明抛出父类没有声明的异常。3.依赖倒转原则（Dependence Inversion Principle）这个是开闭原则的基础，具体内容：面向接口编程，依赖于抽象而不依赖于具体。4.接口隔离原则（Interface Segregation Principle）使用多个隔离的接口，比使用单个接口要好，还是为了降低类之间的耦合度。5.迪米特法则（最少知道原则）（Demeter Principle）一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。6.合成复用原则（Composite Reuse Principle）尽量使用合成/聚合的方式，而不是使用继承。 单例模式懒汉模式（调用时再实例化）12345678910class Singleton&#123; private static Singleton instance; private Singleton() &#123;&#125;; public static Singleton getInstance() &#123; if(instance == null) &#123; instance = new Singleton(); &#125; return instance; &#125;&#125; 这种写法能保证lazy loading，但非线程安全，只适用于单线程情况下 饿汉模式（类加载时即实例化）1234567class Singleton&#123; private static Singleton instance = new Singleton(); private Singleton() &#123;&#125;; public static Singleton getInstance() &#123; return instance; &#125;&#125; 这种方式基于classloder机制避免了多线程的同步问题，不过，instance在类装载时就实例化，虽然导致类装载的原因有很多种，在单例模式中大多数都是调用getInstance方法， 但是也不能确定有其他的方式（或者其他的静态方法）导致类装载，这时候初始化instance显然没有达到lazy loading的效果 静态内部类123456789class Singleton&#123; private Singleton() &#123;&#125;; private static class Single&#123; private final static Singleton instance = new Singleton(); &#125; public static Singleton getInstance() &#123; return Single.instance; &#125;&#125; 既是线程安全的，也能达到lazy loading的效果 简单工厂模式原始简单工厂（静态工厂）fruit接口123interface fruit&#123; public abstract void eat();&#125; Apple类实现fruit接口12345class Apple implements fruit&#123; public void eat()&#123; System.out.println("Apple"); &#125;&#125; Orange类实现fruit接口12345class Orange implements fruit&#123; public void eat()&#123; System.out.println("Orange"); &#125;&#125; 工厂类1234567891011121314// 构造工厂类// 也就是说以后如果我们在添加其他的实例的时候只需要修改工厂类就行了class Factory&#123; public static fruit getInstance(String fruitName)&#123; //静态类 fruit f = null; if("Apple".equals(fruitName))&#123; f = new Apple(); &#125; if("Orange".equals(fruitName))&#123; f = new Orange(); &#125; return f; &#125;&#125; 测试123456class OriginFactory&#123; public static void main(String[] a)&#123; fruit f=Factory.getInstance("Orange"); f.eat(); &#125;&#125; 要点： 1.简单工厂模式也叫静态工厂模式，就是工厂类一般使用静态方法，通过接收的参数的不同的对象的不同来返回不同的对象实例。 2.对于增加新产品无能为力，需要修改工厂类，才能进行扩展。 3.一般使用较多还是简单工厂模式。 采用反射机制的简单工厂修改工厂类123456789101112class Factory_R&#123; public static fruit getInstance(String ClassName)&#123; fruit f = null; try&#123; //传入类路径，通过反射取得实例化对象 f = (fruit)Class.forName(ClassName).newInstance(); &#125;catch (Exception e) &#123; e.printStackTrace(); &#125; return f; &#125;&#125; 测试123456789class ReflectFactory&#123; public static void main(String[] a)&#123; //此处"Reflect.Apple"即类所在目录 fruit f = Factory_R.getInstance("Reflect.Apple"); if(f != null)&#123; f.eat(); &#125; &#125;&#125; 添加新类时修改路径即可，不需要再修改工厂类 IoC简单工厂简单模拟SpringIoC的过程12345678910111213141516// 操作属性文件类,取得Propertiesclass init&#123; public static Properties getPro() throws FileNotFoundException, IOException&#123; Properties pro=new Properties(); File f=new File("fruit.properties"); //读取Properties的配置文件 if(f.exists())&#123; pro.load(new FileInputStream(f)); &#125;else&#123; pro.setProperty("apple", "Reflect.Apple"); pro.setProperty("orange", "Reflect.Orange"); pro.store(new FileOutputStream(f), "FRUIT CLASS"); &#125; return pro; // 返回属性的 key-value列表 &#125;&#125; IoC工厂类123456789101112class Factory_IoC&#123; public static fruit getInstance(String ClassName)&#123; // 通过配置文件的类名找到对应的实际类的路径 fruit f=null; try&#123; f=(fruit)Class.forName(ClassName).newInstance(); &#125;catch (Exception e) &#123; e.printStackTrace(); &#125; return f; &#125;&#125; fruit.properties12apple=Reflect.Appleorange=Reflect.Orange 测试12345678910class IoCFactory&#123; public static void main(String[] a) throws FileNotFoundException, IOException&#123; System.out.println(pro.getProperty("apple")); fruit f=Factory_IoC.getInstance(pro.getProperty("orange")); if(f!=null)&#123; f.eat(); &#125; &#125;&#125; 观察者模式(订阅发布模式)抽象被观察者接口12345interface Observerable&#123; public void registerObserver(Observer o); public void removeObserver(Observer o); public void notifyObserver();&#125; 抽象观察者接口123interface Observer&#123; public void update(String message);&#125; 微信公众号服务实现被观察者接口123456789101112131415161718192021222324252627class WechatServer implements Observerable &#123; private List&lt;Observer&gt; list; private String message; public WechatServer() &#123; list = new ArrayList&lt;Observer&gt;(); &#125; @Override public void registerObserver(Observer o) &#123; list.add(o); &#125; @Override public void removeObserver(Observer o) &#123; list.remove(o); &#125; @Override public void notifyObserver() &#123; for(int i = 0; i &lt; list.size(); i++) &#123; Observer observer = list.get(i); observer.update(message); &#125; &#125; public void setInformation(String message) &#123; this.message = message; System.out.println("微信更新消息：" + message); notifyObserver(); &#125;&#125; 用户实现观察者接口12345678910111213141516class User implements Observer&#123; private String name; private String message; public User(String name) &#123; this.name = name; &#125; @Override public void update(String message) &#123; // TODO Auto-generated method stub this.message = message; subscribe(); &#125; public void subscribe() &#123; System.out.println(name + " 收到推送消息：" + message); &#125;&#125; 测试123456789101112131415161718public class ObserverDemo &#123; public static void main(String[] args) &#123; WechatServer server = new WechatServer(); Observer ob1 = new User("张三"); Observer ob2 = new User("李四"); Observer ob3 = new User("王五"); server.registerObserver(ob1); server.registerObserver(ob2); server.registerObserver(ob3); server.setInformation("陈杨赛场直播间，与您分享不一样的操盘思路：强者恒强战法以及无敌筹码以逸待劳秘笈！"); // 李四取消订阅消息 System.out.println(); server.removeObserver(ob2); server.setInformation("高老师昨日实盘推荐个股 东方网络"); &#125;&#125; 测试结果 生产者消费者模式存储容量类123456789101112131415161718192021222324252627282930313233343536class Storage&#123; private int capacity; private int store; public Storage(int capacity, int store) &#123; this.capacity = capacity; this.store = store; &#125; // 生产 public synchronized void produce(int pro) &#123; while(store + pro &gt; capacity) &#123; System.out.println("将要生产" + pro + "件产品，超过剩余库存量" + (capacity - store) + "，暂时不能进行生产!"); try &#123; wait(); // 当前生产线程等待 &#125;catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; store += pro; System.out.println("生产了" + pro + "件产品，现仓储量为" + store); notifyAll(); //唤醒在此对象监视器上等待的所有线程 &#125; // 消费 public synchronized void consume(int con) &#123; while(store - con &lt; 0) &#123; System.out.println("将要消费" + con + "件产品，超过库存量" + store + "，暂时不能进行消费!"); try &#123; wait(); // 当前消费线程等待 &#125;catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; store -= con; System.out.println("消费了" + con + "件产品，现仓储量为" + store); notifyAll(); //唤醒在此对象监视器上等待的所有线程 &#125;&#125; 生产者类1234567891011class Producer implements Runnable&#123; private Storage storage; private int proNum; public Producer(Storage storage, int proNum) &#123; this.storage = storage; this.proNum = proNum; &#125; public void run() &#123; storage.produce(proNum); &#125;&#125; 消费者类1234567891011class Consumer implements Runnable&#123; private Storage storage; private int conNum; public Consumer(Storage storage, int conNum) &#123; this.storage = storage; this.conNum = conNum; &#125; public void run() &#123; storage.consume(conNum); &#125;&#125; 测试123456789101112131415161718192021222324public class ProConsumer &#123; public static void main(String[] args) &#123; // TODO Auto-generated method stub Storage storage = new Storage(100, 50); // 实现Runnable接口 Thread t1 = new Thread(new Producer(storage, 10)); Thread t2 = new Thread(new Producer(storage, 30)); Thread t3 = new Thread(new Producer(storage, 10)); Thread t4 = new Thread(new Producer(storage, 20)); Thread t5 = new Thread(new Consumer(storage, 20)); Thread t6 = new Thread(new Consumer(storage, 40)); Thread t7 = new Thread(new Consumer(storage, 10)); Thread t8 = new Thread(new Consumer(storage, 30)); t1.start(); t2.start(); t3.start(); t4.start(); t5.start(); t6.start(); t7.start(); t8.start(); &#125;&#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>面试题</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[常用排序算法实现]]></title>
     <url>%2F2018%2F08%2F31%2F%E5%B8%B8%E7%94%A8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%2F</url>
     <content type="text"><![CDATA[快速排序123456789101112131415161718192021//划分函数public static int partition(int[] nums, int left, int right) &#123; int pivot = nums[left]; //取第一个数为枢纽节点 while(left &lt; right) &#123; //使枢纽左边全小于它，右边全大于它 while(left &lt; right &amp;&amp; nums[right] &gt;= pivot) right--; nums[left] = nums[right]; while(left &lt; right &amp;&amp; nums[left] &lt;= pivot) left++; nums[right] = nums[left]; &#125; nums[left] = pivot; //枢纽填入左右指针相遇处 return left;&#125;public static int[] quickSort(int[] nums, int left, int right) &#123; if(left &lt; right) &#123; int index = partition(nums, left, right); quickSort(nums, left, index-1); quickSort(nums, index+1, right); &#125; return nums;&#125; 堆排序123456789101112131415161718192021222324252627282930313233343536373839// 交换数组中两个数的次序public static void swap(int[] nums, int max, int i) &#123; int temp = nums[max]; nums[max] = nums[i]; nums[i] = temp;&#125;// 调整节点大小，保证父节点始终大于子节点(大顶堆)public static void heapify(int[] nums, int i, int size) &#123; int left = 2 * i + 1; // 左子节点下标 int right = 2 * i + 2; // 右子节点下标 int max = i; if(left &lt; size &amp;&amp; nums[left] &gt; nums[max]) &#123; max = left; &#125; if(right &lt; size &amp;&amp; nums[right] &gt; nums[max]) &#123; max = right; &#125; if(max != i) &#123; // 最大节点发生变化则调整 swap(nums, max, i); heapify(nums, max, size); &#125;&#125;// 建立初始大顶堆public static void buildHeap(int[] nums, int size) &#123; // 从第一个非叶节点开始调整堆，直至堆顶 for(int i = (size+1)/2; i &gt;= 0 ;i--) &#123; heapify(nums, i, size); &#125;&#125;public static void heapSort(int[] nums) &#123; int size = nums.length; buildHeap(nums, size); // 建立初始大顶堆 while(size &gt; 1) &#123; // 每次交换堆顶元素和堆最后一个元素，并从堆中去除最后一个元素 swap(nums, 0, --size); heapify(nums, 0, size); &#125;&#125; 归并排序12345678910111213141516171819202122232425262728// 两个有序数组合并public static void merge(int[] nums, int left, int right, int mid) &#123; int[] temp = new int[right-left+1]; //临时数组，存放合并后的数组 int index = 0; int i = left; // 前一数组的起始元素 j = mid+1; // 后一数组的起始元素 while(i &lt;= mid &amp;&amp; j &lt;= right) &#123; temp[index++] = nums[i] &lt;= nums[j] ? nums[i++] : nums[j++]; &#125; while(i &gt; mid &amp;&amp; j &lt;= right) &#123; temp[index++] = nums[j++]; &#125; while(j &gt; right &amp;&amp; i &lt;= mid) &#123; temp[index++] = nums[i++]; &#125; for(int k = left; k &lt;= right; k++) &#123; nums[k] = temp[k-left]; &#125;&#125;public static void mergeSort(int[] nums, int left, int right) &#123; if(left == right) return; //划分至单个节点一定有序，返回 int mid = (left + right)/2; mergeSort(nums, left, mid); mergeSort(nums, mid+1, right); //持续进行两两划分，自底向上进行排序 merge(nums, left, right, mid);&#125; 冒泡排序12345678910111213141516//冒泡public void bubbleSort(int[] nums) &#123; for(int i = 0; i &lt; nums.length-1; i++) &#123; int flag = 0; for(int j = 0; j &lt; nums.length-i-1; j++) &#123; if(nums[j] &gt; nums[j+1]) &#123; int temp = nums[j]; nums[j] = nums[j+1]; nums[j+1] = temp; flag = 1; &#125; &#125; // 若没有发生交换，则已有序，可提前终止 if(flag == 0) break; &#125;&#125; 插入排序123456789101112public void insertSort(int[] nums) &#123; for(int i = 1; i &lt; nums.length; i++) &#123; int temp = nums[i]; int j = i; // 在前面已有序的数组中找到合适的位置插入 while(j &gt;= 1 &amp;&amp; nums[j-1] &gt; temp) &#123; nums[j] = nums[j-1]; // 右移覆盖 j--; &#125; nums[j] = temp; // 插入 &#125;&#125; 选择排序12345678910111213public void selectSort(int[] nums) &#123; for(int i = 0; i &lt; nums.length; i++) &#123; int min = i; for(int j = i+1; j &lt; nums.length; j++) &#123; if(nums[j] &lt; nums[min]) &#123; min = j; &#125; &#125; int temp = nums[i]; nums[i] = nums[min]; nums[min] = temp; &#125;&#125;]]></content>
@@ -239,8 +251,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>回溯</tag>
         <tag>动态规划</tag>
+        <tag>回溯</tag>
         <tag>DFS</tag>
         <tag>递归</tag>
       </tags>
@@ -339,14 +351,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[快排]]></title>
-    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
+    <title><![CDATA[二叉树实现]]></title>
+    <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
       <categories>
-        <category>Java</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>排序</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -358,6 +370,17 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[快排]]></title>
+    <url>%2F2018%2F06%2F09%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[父类123456789101112131415161718192021222324252627 public static void quickSort(int arr[], int low, int high) &#123; int l = low; int h = high; int key = arr[low]; if(l &gt;= h) &#123; return; &#125;// 划分集合 while(l &lt; h) &#123; while(arr[h] &gt;= key &amp;&amp; h &gt; l) &#123; h--; &#125; arr[l] = arr[h]; while(arr[l] &lt;= key &amp;&amp; l &lt; h) &#123; l++; &#125; arr[h] = arr[l]; &#125; arr[l] = key;// 递归调用 if(l &gt; low) &#123; quickSort(arr, low, l-1); &#125; if(h &lt; high) &#123; quickSort(arr, l+1, high); &#125; &#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[链表实现]]></title>
     <url>%2F2018%2F06%2F09%2F%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%2F</url>
     <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class LinkList &#123; private class Node&#123; private int data; private Node next; public Node() &#123; &#125; public Node(int data) &#123; this.data = data; &#125; &#125; private Node head; // 头指针 private Node tail = new Node(); // 尾指针 private int size; public void circulation() &#123; // 连接为循环链表 Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; tail = temp; tail.next = head; &#125; public void add(int i) &#123; // 添加结点 if(head == null) &#123; // 没有头结点则添加头结点 head = new Node(1); size++; return; &#125; Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = new Node(i); size++; &#125; public void delete(int index) &#123; int i = 1; if(index &lt; 0) &#123; return; &#125; if(index == 0) &#123; // 删除头结点 head = head.next; size--; return; &#125; Node temp = head; while(temp.next != null) &#123; // 删除指定位置结点 if(index == i) &#123; temp.next = temp.next.next; size--; return; &#125; temp = temp.next; i++; &#125; &#125; public int size() &#123; return size; &#125; public void print() &#123; Node temp = head; for(int i = 0; i &lt; size(); ++i) &#123; System.out.print(temp.data + " "); temp = temp.next; &#125; &#125;]]></content>
@@ -366,17 +389,6 @@
       </categories>
       <tags>
         <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[二叉树实现]]></title>
-    <url>%2F2018%2F06%2F09%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0%2F</url>
-    <content type="text"><![CDATA[结点结构12345678910111213class TreeNode&lt;T&gt;&#123; public T data; public TreeNode&lt;T&gt; left; public TreeNode&lt;T&gt; right; public TreeNode(T data, TreeNode&lt;T&gt; left, TreeNode&lt;T&gt; right) &#123; this.data = data; this.left = left; this.right = right; &#125;&#125; 先序创建二叉树123456789101112131415161718public class BinaryTree&lt;T&gt;&#123; /* * 先序创建二叉树 * 返回：根节点 */ public TreeNode&lt;T&gt; creatBinaryPre(LinkedList&lt;T&gt; treeData) &#123; TreeNode&lt;T&gt; root=null; T data=treeData.removeFirst(); if (data!=null) &#123; root=new TreeNode&lt;T&gt;(data, null, null); root.left=creatBinaryPre(treeData); root.right=creatBinaryPre(treeData); &#125; return root; &#125; 先序遍历二叉树123456789101112/* * 先序遍历二叉树（递归） */ public void PrintBinaryTreePreRecur(TreeNode&lt;T&gt; root) &#123; if (root!=null) &#123; System.out.print(root.data); PrintBinaryTreePreRecur(root.left); PrintBinaryTreePreRecur(root.right); &#125; &#125;]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -427,6 +439,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[括号生成]]></title>
+    <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
+    <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DP-最大上升子序列LIS]]></title>
     <url>%2F2018%2F06%2F09%2F%E6%9C%80%E5%A4%A7%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97LIS%2F</url>
     <content type="text"><![CDATA[题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]输出: 4解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。说明:可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 算法思路O(n^2)解法，DP实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
@@ -463,18 +487,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[括号生成]]></title>
-    <url>%2F2018%2F06%2F09%2FDFS-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90%2F</url>
-    <content type="text"><![CDATA[题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ “((()))”, “(()())”, “(())()”, “()(())”, “()()()”] 算法思路回溯实现12345678910111213141516171819class Solution &#123; void dfs(List&lt;String&gt; result, String str, int left, int right, int n)&#123; if(left &gt; n || right &gt; n || left &lt; right) return; if(left == n &amp;&amp; right == n)&#123; result.add(str); return; &#125; dfs(result, str+"(", left+1, right, n); dfs(result, str+")", left, right+1, n); &#125; public List&lt;String&gt; generateParenthesis(int n) &#123; int count = 0; List&lt;String&gt; result = new ArrayList(); if(n == 0) return result; String str = ""; dfs(result, str, 0, 0, n); return result; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[回溯-分割回文串]]></title>
     <url>%2F2018%2F06%2F09%2F%E5%9B%9E%E6%BA%AF-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%2F</url>
     <content type="text"><![CDATA[题目描述给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案。示例:输入: “aab”输出:[ [“aa”,”b”], [“a”,”a”,”b”]] 算法思路回溯实现1234567891011121314151617181920212223242526272829303132class Solution &#123; boolean isP(String s)&#123; int i = 0; int j = s.length()-1; while(i &lt; j)&#123; if(s.charAt(i) != s.charAt(j)) return false; else i++; j--; &#125; return true; &#125; void dfs(List&lt;List&lt;String&gt;&gt; result, String s, List&lt;String&gt; res, int index)&#123; if(index == s.length())&#123; List&lt;String&gt; ress = new ArrayList&lt;String&gt;(res); result.add(ress); return; &#125; for(int i = index; i &lt; s.length(); i++)&#123; if(isP(s.substring(index, i+1)))&#123; res.add(s.substring(index, i+1)); dfs(result, s, res, i+1); res.remove(res.size()-1); &#125; &#125; &#125; public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; List&lt;List&lt;String&gt;&gt; result = new ArrayList(); List&lt;String&gt; res = new ArrayList(); dfs(result, s, res, 0); return result; &#125;&#125;]]></content>
@@ -484,19 +496,6 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[DP+回溯-单词拆分 II]]></title>
-    <url>%2F2018%2F06%2F09%2FDP%2B%E5%9B%9E%E6%BA%AF-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20II%2F</url>
-    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入:s = “catsanddog”wordDict = [“cat”, “cats”, “and”, “sand”, “dog”]输出:[ “cats and dog”, “cat sand dog”] 示例 2：输入:s = “pineapplepenapple”wordDict = [“apple”, “pen”, “applepen”, “pine”, “pineapple”]输出:[ “pine apple pen apple”, “pineapple pen apple”, “pine applepen apple”]解释: 注意你可以重复使用字典中的单词。 示例 3：输入:s = “catsandog”wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出:[] 算法思路这道题类似 Word Break I 判断是否能把字符串拆分为字典里的单词 @LeetCode 只不过要求计算的并不仅仅是是否能拆分，而是要求出所有的拆分方案。因此用递归。但是直接递归做会超时，原因是LeetCode里有几个很长但是无法拆分的情况，所以就先跑一遍Word Break I，先判断能否拆分，然后再进行拆分。 DP实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123; boolean isBreak(String s, List&lt;String&gt; wordDict) &#123; boolean[] canBreak = new boolean[s.length()+1]; canBreak[0] = true; for(int i=1; i&lt;=s.length(); i++) &#123; boolean flag = false; for(int j=0; j&lt;i; j++) &#123; if(canBreak[j] &amp;&amp; wordDict.contains(s.substring(j,i))) &#123; flag = true; break; &#125; &#125; canBreak[i] = flag; &#125; return canBreak[s.length()]; &#125; void dfs(String s, List&lt;String&gt; wordDict, String str, int index)&#123; String result = str; //记录字符串状态 int len = s.length(); String tmp = s.substring(index, len); if(wordDict.contains(tmp))&#123; //最后一段存在于字典中，则保存结果 str += tmp; res.add(str); &#125; List&lt;Integer&gt; listIndex = new ArrayList(); List&lt;String&gt; listStr = new ArrayList(); for(int i = index; i &lt; len; i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; listIndex.add(i+1); listStr.add(temp); &#125; &#125; String temp = result; //保存递归前的字符串状态，以便回溯 for(int i = 0; i &lt; listIndex.size(); i++)&#123; result += listStr.get(i) + " "; dfs(s, wordDict, result, listIndex.get(i)); result = temp; &#125; &#125; List&lt;String&gt; res = new ArrayList(); public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(!isBreak(s, wordDict)) return res; String str = ""; dfs(s, wordDict, str, 0); return res; &#125;&#125;]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>回溯</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -521,6 +520,19 @@
       <tags>
         <tag>LeetCode</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DP+回溯-单词拆分 II]]></title>
+    <url>%2F2018%2F06%2F09%2FDP%2B%E5%9B%9E%E6%BA%AF-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%20II%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。示例 1：输入:s = “catsanddog”wordDict = [“cat”, “cats”, “and”, “sand”, “dog”]输出:[ “cats and dog”, “cat sand dog”] 示例 2：输入:s = “pineapplepenapple”wordDict = [“apple”, “pen”, “applepen”, “pine”, “pineapple”]输出:[ “pine apple pen apple”, “pineapple pen apple”, “pine applepen apple”]解释: 注意你可以重复使用字典中的单词。 示例 3：输入:s = “catsandog”wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]输出:[] 算法思路这道题类似 Word Break I 判断是否能把字符串拆分为字典里的单词 @LeetCode 只不过要求计算的并不仅仅是是否能拆分，而是要求出所有的拆分方案。因此用递归。但是直接递归做会超时，原因是LeetCode里有几个很长但是无法拆分的情况，所以就先跑一遍Word Break I，先判断能否拆分，然后再进行拆分。 DP实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123; boolean isBreak(String s, List&lt;String&gt; wordDict) &#123; boolean[] canBreak = new boolean[s.length()+1]; canBreak[0] = true; for(int i=1; i&lt;=s.length(); i++) &#123; boolean flag = false; for(int j=0; j&lt;i; j++) &#123; if(canBreak[j] &amp;&amp; wordDict.contains(s.substring(j,i))) &#123; flag = true; break; &#125; &#125; canBreak[i] = flag; &#125; return canBreak[s.length()]; &#125; void dfs(String s, List&lt;String&gt; wordDict, String str, int index)&#123; String result = str; //记录字符串状态 int len = s.length(); String tmp = s.substring(index, len); if(wordDict.contains(tmp))&#123; //最后一段存在于字典中，则保存结果 str += tmp; res.add(str); &#125; List&lt;Integer&gt; listIndex = new ArrayList(); List&lt;String&gt; listStr = new ArrayList(); for(int i = index; i &lt; len; i++)&#123; String temp = s.substring(index, i+1); if(wordDict.contains(temp))&#123; listIndex.add(i+1); listStr.add(temp); &#125; &#125; String temp = result; //保存递归前的字符串状态，以便回溯 for(int i = 0; i &lt; listIndex.size(); i++)&#123; result += listStr.get(i) + " "; dfs(s, wordDict, result, listIndex.get(i)); result = temp; &#125; &#125; List&lt;String&gt; res = new ArrayList(); public List&lt;String&gt; wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(!isBreak(s, wordDict)) return res; String str = ""; dfs(s, wordDict, str, 0); return res; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>动态规划</tag>
+        <tag>回溯</tag>
       </tags>
   </entry>
   <entry>
